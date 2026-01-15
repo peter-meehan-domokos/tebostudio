@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F9F9F9;
+  --foreground: #333333;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* TEBO Studio Brand Colors */
+  --color-navy: #1B2A49;
+  --color-charcoal: #333333;
+  --color-amber: #FFB84D;
+  --color-teal: #39A6A3;
+  --color-coral: #FF6F61;
+  --color-background: #F9F9F9;
+  --color-white: #ffffff;
+  
+  /* Font Variables */
+  --font-heading: var(--font-montserrat);
+  --font-body: var(--font-roboto);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+@layer utilities {
+  /* Modal Animation Styles */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes scaleOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 200ms ease-out;
+  }
+
+  .animate-fadeOut {
+    animation: fadeOut 200ms ease-in;
+  }
+
+  .animate-scaleIn {
+    animation: scaleIn 300ms ease-out;
+  }
+
+  .animate-scaleOut {
+    animation: scaleOut 300ms ease-in;
+  }
 }

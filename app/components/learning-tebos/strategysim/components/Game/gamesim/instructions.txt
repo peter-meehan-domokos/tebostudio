@@ -1,0 +1,106 @@
+Okay I've added two more actions they are both of action type turn, and what they do is they move the players position around the ball. 
+Remember if player is at position A, they can be located to the left of the ball to the right of the ball the top of the ball or 
+the bottom of the ball, and there is a transform object which stores the relevant transforms.
+The starting position and finishing position values describe the required term. These will all be calculated dynamically 
+based on what is happening previously to it and after it. Although interior all of the information could be available as part of the event creation, Stage but for some reason you have decided to make duration dynamic in the other cases so I will follow that pattern here
+Unless you feel it's a better option to refactor things so that you're calculating everything upfront
+Player won't always need to turn so sometimes the duration will be zero if the starting position and finishing position are the same.
+
+Finally I need to tell you the rules to determine what the finishing position is. In a nutshell, the player must always move to the position which is opposite what then next action will do. Let me explain in case you don't follow0 Firstly for the first term which is before the move. 
+
+If the next move is going upwards from C to A, then the player position must be at the bottom of the ball. If they are going down than the player position should be at the top of the ball. The idea is that it's like dribbling the ball in football they have to be behind the ball kicking it forward so that's the image we're trying to get across.
+
+For the pass, if the player is passing the ball to align on the right, then they need to be to the left of the ball, and vice versa. If they are passing the ball, To the line at the top then they need to be, Below the ball at the bottom of the ball and vice versa.
+
+Do you want to ask any questions about this before proceeding?
+
+I want you to actually move the plane and council buttons and the speed controls into the header component. They should be on the right side of the header component, and the side order components should be to the right of the simulation name and summary component. But the right hand side in the corner should be the controls for play cancel and speed. 
+Note that we are moving the controls into the header component so we may need some logic to pass these controls into the game Sim or the simulation
+
+
+
+If the user click specified side order, a simple dialogue opens up it allows the user to click the sides the order that they want to hit it. 
+
+
+
+You were working on a task I asked you to add actions and turns totals to each row in the trails log and you've suddenly stopped and the word and the dialogue has disappeared
+
+
+we are currently showing actions terms and moves for each row of the trialslog on the right hand side
+Instead of the key information is as follows
+ - actions, half-turns, quarter-turns, moves 
+ So I want you to track the number of half-turns and quarter-turns during the simulation instead of a number of turns.
+ And display those on the right hand side of the trial log instead of the total number of turns.
+ Instead of using one letter there is enough space to use a short word: [actions, half-turns, quarter-turns, moves]
+
+This is what I want you to do, I want you to make the axis of the histogram fixed as follows. The X axis buckets should start from 15,And go up to 40 in intervals of 2.5 seconds. The Y axis should start at zero and go up to 10 intervals of two seconds. The width and height of both axis should stay the same throughout. If one of the buckets is has a value higher than 10 we just show it as 10 for now
+
+We actually want to play cancel and speed controls to be part of their own header component above the current header component. The current header component is conceptually grouped with the simulation pitch and events and trials logs as one thing so they should be grouped in a div as they are currently, but the play cancel and speed controls should be outside of in a separate above it. Play cancel state and the speed state should be storedOutside of the simulation div. So the current header should be put back to how it was with the order logic and display to the right hand side and the speed and plate control should be above it in a separate outside of all of the other components in a parent component.
+game rules
+
+
+real life
+ - play hits two different tables in one pass they are automatically disqualified
+ This means in practice they can't really go for the sides unless if they are roughly able to play perpendicular passes.
+ The top and bottom tables could be hit for further away though so that needs to be allowed in the game sim.
+
+
+
+ I have created a new file called to download.js and I have started to implement a function downloadToCSV. I want you to add a button to the header In the right corner download. When this pattern is clicked this function is called. And it should create a CSV file of every row in the trials log and it should download it to the local computer. The implementation Inside downloadToCSV needs to be changed so that it does this for this simulation game.
+But I don't want you to show everything for every row all I want you to show is the following:
+The six sides in order of being hit, followed by actions, quarter-turns, half turns,
+moves, errors, time
+The errors is just the number of errors in total
+So you don't need to show to move eg b_a in the CSV, or where any errors occurred
+Any questions
+
+We're going to change the way that we get an array of numbers. Firstly I want 20 numbers instead of six, but there are still only six sides so it is 20 numbers but all numbers are either 12345 or 6. You cannot use shuffle anymore, I want there to be an equal probability of getting any of the six numbers for every single slot. For now, you can console logout the 20 numbers but in the generate events function just return the first six slice the first six so that the game doesn't change accept it means that side can now be repeated, let's see if this causes any other issues in the game. You could check for me first could you let me know if we allow sides to be repeated would this have any other knock on effects on the way that the game starts and ends would it still work in the same way. Answer the question before you do anything and also let me know if you have any other questions about what I've asked you to do
+If it's simple and not going to have any side effects you can extend the game to use all 20 numbers, if it requires lots of code changes then just slice it so that it's still the first six events for now and we will deal with extending it later
+
+the events log is still not scrolling, maybe the scroll is placed on the wrong div or maybe the div doesn't have a height? Or something else could be causing it
+
+ okay I want to put a new constraint on the game, which is that the game must end if 20 seconds has elapsed. This obviously includes all times for errors and so on which are already built into the game. The speed controls are independent of this is 20 seconds of the game so if the speed control is at times two then it would be after 10 seconds in real life. Can you look into how you would do this and tell me the plan tell me if it's easy and tell me what could go wrong with this request. Report back to me before you proceed
+ response:
+ Potential Issues:
+Mid-Event Termination:
+
+Problem: What if an event is in progress when 20s is reached?
+Solution: Let current event complete, then check time (cleaner)
+Partial Trials:
+
+Problem: Trials might end with fewer than 20 events
+Impact: CSV exports, statistics, trials log would need to handle variable-length trials
+Solution: Already handled since trials are event-based
+User Experience:
+
+Problem: Users might be confused why trial ended early
+Solution: Add visual indicator showing "Time Limit: 20.0s reached"
+Statistics Impact:
+
+Problem: Average calculations might be affected by shorter trials
+Impact: Should be minimal since we track actual duration anyway
+What Could Go Wrong:
+Timing Precision: If events have variable durations due to errors, the cutoff might not be exactly at 20s
+Animation Sync: Visual animations might be cut short if using real-time termination
+State Cleanup: Need to ensure proper cleanup when terminating mid-simulation
+Assessment: This is EASY to implement
+
+ for mid event termination, which solution is simplest - we could either say that the current event is allowed to complete first and then the game stops or we could cancel the current event. Which of these are simplest to implement and cleanest...... Would that also fix the animation sync issue if we allow the event to complete? Regarding state cleanup, that seems quite straightforward to me isn't it could you look at it now and tell me what that would require
+
+
+ we need to change the way a user specifies an order they now need to choose 20 sides, and can repeat choices. 
+
+ At the moment the probability of hitting any side is equal. We are now about to make this more complex as follows.
+ There will be a variable k.
+ Can use a multiplier and works as follows When assigning the probability that aside will be hit in the next event.
+ At any given point in the game, There are some sides which have been hit already and other sides which have not been hit yet.
+ Let h be the number of sites that have been hit, and let u be the number of sites that are still not hit, unhit.
+ Let Ph be the probability that one of the sides which has already been hit will hit again in the next event, 
+ and let Pu the probability at one of the sides which has not yet been hit will be hit in the next event.
+ Then Pu = k X Ph, where x is multiply sign.
+ For example if K equals two, this means the probability that an unhitch side will be hit is twice the probability that the hit side will be hit again
+Who is an example for k=2 so you understand.
+
+After the first event, one side will have been hit and five sides will be not 
+
+
