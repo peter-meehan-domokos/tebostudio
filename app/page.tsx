@@ -18,8 +18,13 @@ export default function Home() {
     if (isRaceModalOpen || isPerfectSquareModalOpen || isStrategySimModalOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isRaceModalOpen, isPerfectSquareModalOpen, isStrategySimModalOpen]);
 
   return (
