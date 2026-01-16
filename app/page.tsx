@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import TheRace from "./components/visualisations/the-race";
 import PerfectSquare from "./components/visualisations/perfect-square";
 import StrategySim from "./components/learning-tebos/strategysim/page";
+import Birds from "./components/visualisations/birds";
 
 export default function Home() {
   const [isRaceModalOpen, setIsRaceModalOpen] = useState(false);
@@ -49,11 +50,8 @@ export default function Home() {
               Discover how TEBOs, learning programs, and data visualisations bring complex ideas to life
             </p>
           </div>
-          <div className="bg-gradient-to-br from-[#39A6A3] to-[#1B2A49] rounded-2xl aspect-video flex items-center justify-center">
-            <div className="text-white text-center p-8">
-              <p className="font-[family-name:var(--font-montserrat)] text-2xl">Hero Image Placeholder</p>
-              <p className="font-[family-name:var(--font-roboto)] text-sm mt-2 opacity-80">Interactive TEBO tools in action</p>
-            </div>
+          <div className="rounded-2xl aspect-video border border-gray-200 overflow-hidden">
+            <Birds />
           </div>
         </div>
       </section>

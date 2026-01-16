@@ -1,0 +1,17 @@
+@keyframes flapLeft {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-18deg);
+  }
+}
+
+@keyframes flapRight {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(18deg);
+  }
+}
