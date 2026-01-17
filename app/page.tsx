@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import TheRace from "./components/visualisations/the-race";
 import PerfectSquare from "./components/visualisations/perfect-square";
 import StrategySim from "./components/learning-tebos/strategysim/page";
-import Birds from "./components/visualisations/birds";
+import Birds from "./components/visualisations/birds-visual";
 
 export default function Home() {
   const [isRaceModalOpen, setIsRaceModalOpen] = useState(false);
@@ -50,87 +50,8 @@ export default function Home() {
               Discover how TEBOs, learning programs, and data visualisations bring complex ideas to life
             </p>
           </div>
-          <div className="rounded-2xl aspect-video border border-gray-200 overflow-hidden">
+          <div className="rounded-2xl aspect-video overflow-hidden">
             <Birds />
-          </div>
-        </div>
-      </section>
-
-      {/* Two Pillars Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
-          {/* Left Column - Educational Tools */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-            <div className="text-4xl mb-4">🧠</div>
-            <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-3xl text-[#1B2A49] mb-4">
-              Educational Tools & Programmes
-            </h2>
-            <p className="font-[family-name:var(--font-roboto)] text-[#333333] mb-8 leading-relaxed">
-              I design practical learning experiences using visual and interactive tools that help people build understanding, confidence, and agency. This includes programmes like Make Sense and Switchplay, and technology-enhanced boundary objects (TEBOs) that make complex ideas tangible and explorable.
-            </p>
-            
-            <div className="space-y-6">
-              <div>
-                <Link
-                  href="/learning/make-sense"
-                  className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors w-full text-center md:w-auto"
-                >
-                  Discover Make Sense →
-                </Link>
-                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-3">
-                  Interactive programmes that help young people explore complex ideas and build confidence in learning.
-                </p>
-              </div>
-
-              <div>
-                <Link
-                  href="/learning/switchplay"
-                  className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors w-full text-center md:w-auto"
-                >
-                  Explore Switchplay →
-                </Link>
-                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-3">
-                  Football-focused TEBO programs that combine practical skills with conceptual understanding.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Data Visualisation */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-            <div className="text-4xl mb-4">📊</div>
-            <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-3xl text-[#1B2A49] mb-4">
-              Data Visualisation & Applied Tools
-            </h2>
-            <p className="font-[family-name:var(--font-roboto)] text-[#333333] mb-8 leading-relaxed">
-              I design and build bespoke data visualisations and interactive tools for organisations and software teams, and advise on data visualisation, including frontend design, interactivity, and reusable tools. I have particular experience in football, data platforms, and other domains.
-            </p>
-            
-            <div className="space-y-6">
-              <div>
-                <Link
-                  href="/data-visualisation/services"
-                  className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors w-full text-center md:w-auto"
-                >
-                  See Data Visualisation Services →
-                </Link>
-                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-3">
-                  Bespoke visualisations and interactive tools, plus guidance on frontend design, dataviz patterns, and reusable components.
-                </p>
-              </div>
-
-              <div>
-                <Link
-                  href="/data-visualisation/football"
-                  className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors w-full text-center md:w-auto"
-                >
-                  Explore Football & Data Tools →
-                </Link>
-                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-3">
-                  Examples of my work in football analytics and data platforms, showing how data insights can drive real-world outcomes.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -212,6 +133,85 @@ export default function Home() {
           <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-6 text-center max-w-2xl mx-auto">
             Browse completed TEBOs, learning programs, and data visualisation projects across education, sport, and tech. Start a conversation about a program, custom tool, or data project — I'd love to collaborate.
           </p>
+        </div>
+      </section>
+
+      {/* Two Pillars Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
+          {/* Left Column - Educational Tools */}
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+            <div className="text-4xl mb-4">🧠</div>
+            <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-3xl text-[#1B2A49] mb-4">
+              Educational Tools & Programmes
+            </h2>
+            <p className="font-[family-name:var(--font-roboto)] text-[#333333] mb-8 leading-relaxed">
+              I design practical learning experiences using visual and interactive tools that help people build understanding, confidence, and agency. This includes programmes like Make Sense and Switchplay, and technology-enhanced boundary objects (TEBOs) that make complex ideas tangible and explorable.
+            </p>
+            
+            <div className="space-y-6">
+              <div>
+                <Link
+                  href="/learning/make-sense"
+                  className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors w-full text-center md:w-auto"
+                >
+                  Discover Make Sense →
+                </Link>
+                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-3">
+                  Interactive programmes that help young people explore complex ideas and build confidence in learning.
+                </p>
+              </div>
+
+              <div>
+                <Link
+                  href="/learning/switchplay"
+                  className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors w-full text-center md:w-auto"
+                >
+                  Explore Switchplay →
+                </Link>
+                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-3">
+                  Football-focused TEBO programs that combine practical skills with conceptual understanding.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Data Visualisation */}
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+            <div className="text-4xl mb-4">📊</div>
+            <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-3xl text-[#1B2A49] mb-4">
+              Data Visualisation & Applied Tools
+            </h2>
+            <p className="font-[family-name:var(--font-roboto)] text-[#333333] mb-8 leading-relaxed">
+              I design and build bespoke data visualisations and interactive tools for organisations and software teams, and advise on data visualisation, including frontend design, interactivity, and reusable tools. I have particular experience in football, data platforms, and other domains.
+            </p>
+            
+            <div className="space-y-6">
+              <div>
+                <Link
+                  href="/data-visualisation/services"
+                  className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors w-full text-center md:w-auto"
+                >
+                  See Data Visualisation Services →
+                </Link>
+                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-3">
+                  Bespoke visualisations and interactive tools, plus guidance on frontend design, dataviz patterns, and reusable components.
+                </p>
+              </div>
+
+              <div>
+                <Link
+                  href="/data-visualisation/football"
+                  className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors w-full text-center md:w-auto"
+                >
+                  Explore Football & Data Tools →
+                </Link>
+                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333] mt-3">
+                  Examples of my work in football analytics and data platforms, showing how data insights can drive real-world outcomes.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
