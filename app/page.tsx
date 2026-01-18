@@ -1,32 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import TheRace from "./components/visualisations/the-race";
-import PerfectSquare from "./components/visualisations/perfect-square";
-import StrategySim from "./components/learning-tebos/strategysim/page";
 import Birds from "./components/visualisations/birds-visual";
 
 export default function Home() {
-  const [isRaceModalOpen, setIsRaceModalOpen] = useState(false);
-  const [isPerfectSquareModalOpen, setIsPerfectSquareModalOpen] = useState(false);
-  const [isStrategySimModalOpen, setIsStrategySimModalOpen] = useState(false);
-
-  // Prevent body scroll when modal is open
-  useEffect(() => {
-    if (isRaceModalOpen || isPerfectSquareModalOpen || isStrategySimModalOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    // Cleanup on unmount
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isRaceModalOpen, isPerfectSquareModalOpen, isStrategySimModalOpen]);
 
   return (
     <div className="min-h-screen bg-[#F9F9F9]">
@@ -65,9 +41,9 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {/* Project Card 1 */}
-            <div 
-              onClick={() => setIsPerfectSquareModalOpen(true)}
-              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            <Link 
+              href="/projects/perfectsquare"
+              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
             >
               <div className="bg-gradient-to-br from-[#1B2A49] to-[#39A6A3] aspect-video flex items-center justify-center">
               </div>
@@ -79,12 +55,12 @@ export default function Home() {
                   Novel multivariate dataviz tool for comparing thousands of n-dimensional vectors against an "ideal" state
                 </p>
               </div>
-            </div>
+            </Link>
 
             {/* Project Card 2 */}
-            <div 
-              onClick={() => setIsStrategySimModalOpen(true)}
-              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            <Link 
+              href="/projects/strategysim"
+              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
             >
               <div className="bg-gradient-to-br from-[#39A6A3] to-[#1B2A49] aspect-video flex items-center justify-center">
               </div>
@@ -96,12 +72,12 @@ export default function Home() {
                   Learning tool combining a classroom football game with personalised strategy simulation and clustering of results
                 </p>
               </div>
-            </div>
+            </Link>
 
             {/* Project Card 3 */}
-            <div 
-              onClick={() => setIsRaceModalOpen(true)}
-              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            <Link 
+              href="/projects/therace"
+              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
             >
               <div className="bg-gradient-to-br from-[#FFB84D] to-[#FF6F61] aspect-video flex items-center justify-center">
               </div>
@@ -113,7 +89,7 @@ export default function Home() {
                   Engaging and insightful way to depict cumulative time-series data for comparative purposes
                 </p>
               </div>
-            </div>
+            </Link>
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center">
@@ -357,117 +333,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      {/* Perfect Square Modal */}
-      <AnimatePresence>
-        {isPerfectSquareModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-8"
-            onClick={() => setIsPerfectSquareModalOpen(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-7xl"
-              style={{ height: '85vh' }}
-            >
-              <button
-                onClick={() => setIsPerfectSquareModalOpen(false)}
-                className="absolute -top-4 -right-4 bg-white hover:bg-gray-100 text-[#333333] hover:text-[#1B2A49] w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl font-bold z-10 transition-colors cursor-pointer"
-                aria-label="Close modal"
-              >
-                ×
-              </button>
-              <div
-                className="bg-white rounded-2xl w-full h-full shadow-2xl overflow-hidden"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <PerfectSquare />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* The Race Modal */}
-      <AnimatePresence>
-        {isRaceModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-8"
-            onClick={() => setIsRaceModalOpen(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-7xl"
-              style={{ height: '85vh' }}
-            >
-              <button
-                onClick={() => setIsRaceModalOpen(false)}
-                className="absolute -top-4 -right-4 bg-white hover:bg-gray-100 text-[#333333] hover:text-[#1B2A49] w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl font-bold z-10 transition-colors cursor-pointer"
-                aria-label="Close modal"
-              >
-                ×
-              </button>
-              <div
-                className="bg-white rounded-2xl w-full h-full shadow-2xl overflow-hidden"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <TheRace />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Strategy Sim Modal */}
-      <AnimatePresence>
-        {isStrategySimModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-8"
-            onClick={() => setIsStrategySimModalOpen(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-7xl"
-              style={{ height: '85vh' }}
-            >
-              <button
-                onClick={() => setIsStrategySimModalOpen(false)}
-                className="absolute -top-4 -right-4 bg-white hover:bg-gray-100 text-[#333333] hover:text-[#1B2A49] w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl font-bold z-10 transition-colors cursor-pointer"
-                aria-label="Close modal"
-              >
-                ×
-              </button>
-              <div
-                className="bg-white rounded-2xl w-full h-full shadow-2xl overflow-hidden"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <StrategySim />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
