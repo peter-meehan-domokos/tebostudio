@@ -14,7 +14,7 @@ import './bird/bird.css';
 
 export default function BirdsVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   
   // Mode state
   const [mode, setMode] = useState<Mode>('chaos');
@@ -29,7 +29,7 @@ export default function BirdsVisual() {
 
   // Create birds once (using useState to avoid useMemo impurity)
   const [initialBirds] = useState(() => {
-    const birdsPerColor = 200;
+    const birdsPerColor = 300;
     const colors: Array<'blue' | 'orange' | 'purple'> = ['blue', 'orange', 'purple'];
     
     return colors.flatMap((colorGroup, groupIndex) => 
@@ -62,28 +62,34 @@ export default function BirdsVisual() {
     modeRef.current = mode;
   }, [mode]);
 
-  // Auto-cycle through modes every 10 seconds with countdown (first mode only 5 seconds)
+  // Auto-cycle through modes with varying durations (first chaos only 5 seconds)
   useEffect(() => {
     const modeSequence: Mode[] = ['chaos', 'bunch', 'circle', 'line'];
+    const modeDurations: Record<Mode, number> = {
+      chaos: 10000,
+      bunch: 15000,
+      circle: 15000,
+      line: 10000
+    };
     let lastChangeTime = 0;
     let isFirstTransition = true;
+    let currentModeIndex = 0;
     setCountdown(5); // First mode is 5 seconds
     
     const timer = d3.timer((elapsed) => {
       const timeInCurrentMode = elapsed - lastChangeTime;
-      const modeDuration = isFirstTransition ? 5000 : 10000;
+      const currentMode = modeSequence[currentModeIndex];
+      const modeDuration = isFirstTransition ? 5000 : modeDurations[currentMode];
       const secondsRemaining = Math.max(0, Math.ceil((modeDuration - timeInCurrentMode) / 1000));
       setCountdown(secondsRemaining);
       
       if (timeInCurrentMode >= modeDuration) {
-        setMode((currentMode) => {
-          const currentIndex = modeSequence.indexOf(currentMode);
-          const nextIndex = (currentIndex + 1) % modeSequence.length;
-          return modeSequence[nextIndex];
-        });
+        currentModeIndex = (currentModeIndex + 1) % modeSequence.length;
+        setMode(modeSequence[currentModeIndex]);
         lastChangeTime = elapsed;
         isFirstTransition = false;
-        setCountdown(10);
+        const nextDuration = modeDurations[modeSequence[currentModeIndex]];
+        setCountdown(Math.ceil(nextDuration / 1000));
       }
     });
 
@@ -94,9 +100,12 @@ export default function BirdsVisual() {
 
   // Initialize and run D3 simulation (client-side only)
   useEffect(() => {
-    const svgEl = svgRef.current;
+    const canvas = canvasRef.current;
     const containerEl = containerRef.current;
-    if (!svgEl || !containerEl) return;
+    if (!canvas || !containerEl) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     // Get viewport dimensions
     const getViewport = () => {
@@ -109,6 +118,14 @@ export default function BirdsVisual() {
 
     const { w, h } = getViewport();
     dimensionsRef.current = { w, h };
+
+    // Handle retina displays
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+    ctx.scale(dpr, dpr);
 
     // Initialize birds only once
     if (birdsRef.current.length === 0) {
@@ -159,37 +176,6 @@ export default function BirdsVisual() {
       });
     });
 
-    // Build SVG elements once
-    const svg = d3.select(svgEl);
-    svg.selectAll('*').remove();
-
-    const g = svg.append('g').attr('class', 'birds');
-
-    // Add blur filter definition
-    const defs = svg.append('defs');
-    defs.append('filter')
-      .attr('id', 'blur-filter')
-      .append('feGaussianBlur')
-      .attr('in', 'SourceGraphic')
-      .attr('stdDeviation', 0.5);
-
-    g.selectAll<SVGCircleElement, BirdData>('circle.bird')
-      .data(birds, d => d.id)
-      .join('circle')
-      .attr('class', 'bird')
-      .attr('r', 6)
-      .attr('fill', d => d.color ?? 'blue')
-      .attr('opacity', 0) // Start invisible
-      .attr('filter', 'url(#blur-filter)');
-
-    // Fade in dots after delay
-    setTimeout(() => {
-      svg.selectAll<SVGCircleElement, BirdData>('circle.bird')
-        .transition()
-        .duration(800)
-        .attr('opacity', 0.5);
-    }, 1500);
-
     // Create simulation with positional forces
     const simulation = createBirdSimulation(birds, defaultSimulationConfig);
     simRef.current = simulation;
@@ -225,15 +211,6 @@ export default function BirdsVisual() {
           bird.vx = (bird.vx ?? 0) + (Math.random() * 2 - 1) * currentWanderStrength;
           bird.vy = (bird.vy ?? 0) + (Math.random() * 2 - 1) * currentWanderStrength;
         });
-        
-        if (Math.random() < 0.02 && modeRef.current === 'chaos') {
-          console.log('🌀 Applying wander, alpha:', simulation.alpha());
-          console.log('Sample bird velocity change:', 
-            `vx: ${beforeVx?.toFixed(3)} → ${birdsRef.current[0].vx?.toFixed(3)}`,
-            `vy: ${beforeVy?.toFixed(3)} → ${birdsRef.current[0].vy?.toFixed(3)}`);
-          console.log('Sample bird position:', 
-            `x: ${birdsRef.current[0].x?.toFixed(1)}, y: ${birdsRef.current[0].y?.toFixed(1)}`);
-        }
       }
 
       // Check if repulsor is active
@@ -317,21 +294,26 @@ export default function BirdsVisual() {
         attractorRef.current = null;
       }
 
-      // Render transforms directly
-      svg.selectAll<SVGCircleElement, BirdData>('circle.bird')
-        .attr('cx', d => d.x ?? 0)
-        .attr('cy', d => d.y ?? 0);
+      // Render to canvas
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalAlpha = 0.5;
+      
+      birdsRef.current.forEach(bird => {
+        ctx.fillStyle = bird.color ?? '#39A6A3';
+        ctx.beginPath();
+        ctx.arc(bird.x ?? 0, bird.y ?? 0, 6, 0, Math.PI * 2);
+        ctx.fill();
+      });
     });
 
     // Click interaction
     const handlePointerDown = (ev: PointerEvent) => {
       const { w: W, h: H } = dimensionsRef.current;
-      const pt = svgEl.createSVGPoint();
-      pt.x = ev.clientX;
-      pt.y = ev.clientY;
-      const ctm = svgEl.getScreenCTM();
-      if (!ctm) return;
-      const local = pt.matrixTransform(ctm.inverse());
+      const rect = canvas.getBoundingClientRect();
+      const local = {
+        x: ev.clientX - rect.left,
+        y: ev.clientY - rect.top
+      };
 
       // Random radius and strength on each click
       const baseRadius = Math.min(W, H) * 0.18;
@@ -361,12 +343,18 @@ export default function BirdsVisual() {
       simulation.alpha(reheatAlpha);
     };
 
-    svgEl.addEventListener('pointerdown', handlePointerDown);
+    canvas.addEventListener('pointerdown', handlePointerDown);
 
     // Resize handler
     const resizeObserver = new ResizeObserver(() => {
       const viewport = getViewport();
       dimensionsRef.current = viewport;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = viewport.w * dpr;
+      canvas.height = viewport.h * dpr;
+      canvas.style.width = `${viewport.w}px`;
+      canvas.style.height = `${viewport.h}px`;
+      ctx.scale(dpr, dpr);
       simulation.alpha(0.4).restart();
     });
     resizeObserver.observe(containerEl);
@@ -374,10 +362,31 @@ export default function BirdsVisual() {
     // Start simulation
     simulation.alpha(1).restart();
 
+    // Pause simulation when off-screen for performance
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        const isVisible = entries[0].isIntersecting;
+        
+        if (isVisible) {
+          // Resume simulation when scrolled back into view
+          console.log('🟢 Birds visible - resuming simulation');
+          simulation.restart();
+        } else {
+          // Pause simulation when off-screen
+          console.log('🔴 Birds off-screen - pausing simulation');
+          simulation.stop();
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% visible
+    );
+
+    intersectionObserver.observe(canvas);
+
     // Cleanup
     return () => {
-      svgEl.removeEventListener('pointerdown', handlePointerDown);
+      canvas.removeEventListener('pointerdown', handlePointerDown);
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
       simulation.stop();
       simRef.current = null;
     };
@@ -417,25 +426,14 @@ export default function BirdsVisual() {
         b.slotY = margin + Math.random() * Math.max(0, h - margin * 2);
       });
       
-      // Use strong forces to move birds to random positions
-      fx.x((d) => d.slotX ?? w / 2).strength(0.16);
-      fy.y((d) => d.slotY ?? h / 2).strength(0.16);
+      // Use very gentle forces to move birds to random positions
+      fx.x((d) => d.slotX ?? w / 2).strength(0.05);
+      fy.y((d) => d.slotY ?? h / 2).strength(0.05);
       
-      sim.alphaTarget(0.08);
-      sim.alpha(1.0).restart(); // Strong boost to spread out
+      sim.alphaTarget(0.12); // Keep simulation gently warm during transition
+      sim.alpha(0.08).restart(); // Very gentle boost
       
-      // After birds arrive, turn off positional forces and add random velocities
-      setTimeout(() => {
-        if (modeRef.current === 'chaos') {
-          fx.strength(0);
-          fy.strength(0);
-          // Give strong random velocities for chaotic movement
-          birds.forEach(b => {
-            b.vx = (Math.random() - 0.5) * 8;
-            b.vy = (Math.random() - 0.5) * 8;
-          });
-        }
-      }, 2000); // Increased time to allow full spread
+      // Let forces naturally drift birds to their positions without sudden velocity changes
     } else {
       sim.alphaTarget(0.03); // Keep gently warm for continuous wander
       
@@ -443,12 +441,12 @@ export default function BirdsVisual() {
         // Each color group has its own center horizontally
         fx.x((d) => getCenterX(d.colorGroup)).strength((d) => {
           const rank = d.colorRank ?? 0;
-          const t = 1 - (rank / 199); // 1 (lightest) to 0 (darkest) within group of 200
+          const t = 1 - (rank / 299); // 1 (lightest) to 0 (darkest) within group of 300
           return 0.01 + t * 0.04; // Range: 0.05 (light, weak pull) to 0.01 (dark, strong pull)
         });
         fy.y(cy).strength((d) => {
           const rank = d.colorRank ?? 0;
-          const t = 1 - (rank / 199);
+          const t = 1 - (rank / 299);
           return 0.01 + t * 0.04;
         });
       }
@@ -459,7 +457,7 @@ export default function BirdsVisual() {
         // Calculate exact positions around three separate circles based on colorRank
         birds.forEach(b => {
           const rank = b.colorRank ?? 0;
-          const angle = (rank / 200) * Math.PI * 2 - Math.PI / 2; // Start at top, clockwise
+          const angle = (rank / 300) * Math.PI * 2 - Math.PI / 2; // Start at top, clockwise
           const centerX = getCenterX(b.colorGroup);
           b.slotX = centerX + radius * Math.cos(angle);
           b.slotY = cy + radius * Math.sin(angle);
@@ -477,7 +475,7 @@ export default function BirdsVisual() {
         
         birds.forEach(b => {
           const rank = b.colorRank ?? 0;
-          const t = rank / 199; // 0 to 1 within group of 200
+          const t = rank / 299; // 0 to 1 within group of 300
           b.slotX = getCenterX(b.colorGroup);
           b.slotY = margin + t * usable;
         });
@@ -486,8 +484,8 @@ export default function BirdsVisual() {
         fy.y((d) => d.slotY ?? cy).strength(0.035);
       }
 
-      // Reheat on mode change for ordered modes
-      sim.alpha(0.6).restart();
+      // Very gentle reheat on mode change for smooth ordered transitions
+      sim.alpha(0.12).restart();
     }
   }, [mode]);
 
@@ -558,8 +556,8 @@ export default function BirdsVisual() {
         ))}
       </div>
 
-      <svg
-        ref={svgRef}
+      <canvas
+        ref={canvasRef}
         style={{
           width: '100%',
           height: '100%',
@@ -568,6 +566,22 @@ export default function BirdsVisual() {
           cursor: 'pointer'
         }}
       />
+      
+      {/* Click instruction below the visual */}
+      <div style={{
+        position: 'absolute',
+        bottom: -30,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        fontFamily: 'var(--font-roboto)',
+        fontSize: 13,
+        color: '#999999',
+        textAlign: 'center',
+        opacity: 0.8,
+        whiteSpace: 'nowrap'
+      }}>
+        click above to cause chaos
+      </div>
     </div>
   );
 }

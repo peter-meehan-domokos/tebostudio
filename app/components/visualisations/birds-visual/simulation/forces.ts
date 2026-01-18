@@ -43,7 +43,7 @@ export interface SimulationConfig {
  */
 export const defaultSimulationConfig: SimulationConfig = {
   collisionRadiusBase: 2.25,
-  velocityDecay: 0.15, // Lower = slower, smoother movement (default is 0.4)
+  velocityDecay: 0.4, // Higher = slower movement (particles lose momentum faster)
   maxSpeed: 3.5,
   positionPadding: 10,
   wanderStrength: 0.08

@@ -20,7 +20,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "TEBO Studio - Making sense of a complex world",
-  description: "Educational tools, learning programmes, and data visualisation services designed to bring complex ideas to life.",
+  description: "Data visualisations, interactive tools, and sense-making experiences designed to bring complex ideas to life.",
 };
 
 export default function RootLayout({

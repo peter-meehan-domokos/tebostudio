@@ -27,36 +27,8 @@ export default function Navigation() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {/* Learning Dropdown */}
-            <div className="relative group">
-              <Link
-                href="/learning"
-                className="font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] transition-colors py-2"
-                onMouseEnter={() => setOpenDropdown("learning")}
-              >
-                Learning
-              </Link>
-              <div
-                className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <Link
-                  href="/learning/make-sense"
-                  className="block px-4 py-3 font-[family-name:var(--font-roboto)] text-[#333333] hover:bg-[#F9F9F9] hover:text-[#39A6A3] transition-colors first:rounded-t-lg"
-                >
-                  Make Sense
-                </Link>
-                <Link
-                  href="/learning/switchplay"
-                  className="block px-4 py-3 font-[family-name:var(--font-roboto)] text-[#333333] hover:bg-[#F9F9F9] hover:text-[#39A6A3] transition-colors last:rounded-b-lg"
-                >
-                  Switchplay
-                </Link>
-              </div>
-            </div>
-
             {/* Data Visualisation Dropdown */}
-            <div className="relative group">
+            <div className="relative group" style={{ display: 'none' }}>
               <Link
                 href="/data-visualisation"
                 className="font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] transition-colors py-2"
@@ -83,6 +55,34 @@ export default function Navigation() {
               </div>
             </div>
 
+            {/* Learning Dropdown */}
+            <div className="relative group" style={{ display: 'none' }}>
+              <Link
+                href="/learning"
+                className="font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] transition-colors py-2"
+                onMouseEnter={() => setOpenDropdown("learning")}
+              >
+                Learning
+              </Link>
+              <div
+                className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <Link
+                  href="/learning/make-sense"
+                  className="block px-4 py-3 font-[family-name:var(--font-roboto)] text-[#333333] hover:bg-[#F9F9F9] hover:text-[#39A6A3] transition-colors first:rounded-t-lg"
+                >
+                  Make Sense
+                </Link>
+                <Link
+                  href="/learning/switchplay"
+                  className="block px-4 py-3 font-[family-name:var(--font-roboto)] text-[#333333] hover:bg-[#F9F9F9] hover:text-[#39A6A3] transition-colors last:rounded-b-lg"
+                >
+                  Switchplay
+                </Link>
+              </div>
+            </div>
+
             <Link
               href="/about"
               className="font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] transition-colors"
@@ -95,6 +95,13 @@ export default function Navigation() {
               className="font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] transition-colors"
             >
               Projects
+            </Link>
+
+            <Link
+              href="/testimonials"
+              className="font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] transition-colors"
+            >
+              Testimonials
             </Link>
 
             <Link
@@ -136,42 +143,8 @@ export default function Navigation() {
           }`}
         >
           <div className="flex flex-col gap-2 pb-4">
-            {/* Learning Section */}
-            <div>
-              <Link
-                href="/learning"
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleDropdown("learning");
-                }}
-                className="block w-full text-left font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] py-2 transition-colors"
-              >
-                Learning
-              </Link>
-              <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openDropdown === "learning" ? "max-h-32" : "max-h-0"
-                }`}
-              >
-                <Link
-                  href="/learning/make-sense"
-                  className="block pl-4 py-2 font-[family-name:var(--font-roboto)] text-sm text-[#333333] hover:text-[#39A6A3] transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Make Sense
-                </Link>
-                <Link
-                  href="/learning/switchplay"
-                  className="block pl-4 py-2 font-[family-name:var(--font-roboto)] text-sm text-[#333333] hover:text-[#39A6A3] transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Switchplay
-                </Link>
-              </div>
-            </div>
-
             {/* Data Visualisation Section */}
-            <div>
+            <div style={{ display: 'none' }}>
               <Link
                 href="/data-visualisation"
                 onClick={(e) => {
@@ -204,6 +177,40 @@ export default function Navigation() {
               </div>
             </div>
 
+            {/* Learning Section */}
+            <div style={{ display: 'none' }}>
+              <Link
+                href="/learning"
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleDropdown("learning");
+                }}
+                className="block w-full text-left font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] py-2 transition-colors"
+              >
+                Learning
+              </Link>
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  openDropdown === "learning" ? "max-h-32" : "max-h-0"
+                }`}
+              >
+                <Link
+                  href="/learning/make-sense"
+                  className="block pl-4 py-2 font-[family-name:var(--font-roboto)] text-sm text-[#333333] hover:text-[#39A6A3] transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Make Sense
+                </Link>
+                <Link
+                  href="/learning/switchplay"
+                  className="block pl-4 py-2 font-[family-name:var(--font-roboto)] text-sm text-[#333333] hover:text-[#39A6A3] transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Switchplay
+                </Link>
+              </div>
+            </div>
+
             <Link
               href="/about"
               className="font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] py-2 transition-colors"
@@ -218,6 +225,14 @@ export default function Navigation() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Projects
+            </Link>
+
+            <Link
+              href="/testimonials"
+              className="font-[family-name:var(--font-roboto)] font-medium text-[#333333] hover:text-[#39A6A3] py-2 transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Testimonials
             </Link>
 
             <Link

@@ -17,7 +17,7 @@ export default function Learning() {
         </h1>
         
         <p className="font-[family-name:var(--font-roboto)] text-xl text-[#333333] max-w-3xl mb-12">
-          I design practical learning experiences that help young people explore complex ideas, build confidence, and develop genuine understanding through interactive TEBOs and structured programmes.
+          I design practical sense-making experiences that help young people explore complex ideas, build confidence, and develop genuine understanding through interactive TEBOs and structured programmes.
         </p>
         
         <div className="grid md:grid-cols-2 gap-8">

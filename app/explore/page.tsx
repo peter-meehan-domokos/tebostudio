@@ -16,20 +16,10 @@ export default function Explore() {
         </h1>
         
         <p className="font-[family-name:var(--font-roboto)] text-xl text-[#333333] max-w-3xl mb-12">
-          Discover how TEBOs, learning programs, and data visualisations bring complex ideas to life.
+          Discover how to bring complex ideas to life.
         </p>
         
         <div className="grid md:grid-cols-2 gap-8">
-          <Link href="/make-sense" className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-4xl mb-4">🧠</div>
-            <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-2xl text-[#1B2A49] mb-3">
-              Educational Tools
-            </h2>
-            <p className="font-[family-name:var(--font-roboto)] text-[#333333]">
-              Interactive learning experiences and TEBO programs
-            </p>
-          </Link>
-          
           <Link href="/data-visualisation" className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow">
             <div className="text-4xl mb-4">📊</div>
             <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-2xl text-[#1B2A49] mb-3">
@@ -37,6 +27,16 @@ export default function Explore() {
             </h2>
             <p className="font-[family-name:var(--font-roboto)] text-[#333333]">
               Bespoke visualisations and interactive tools
+            </p>
+          </Link>
+          
+          <Link href="/make-sense" className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow">
+            <div className="text-4xl mb-4">🧠</div>
+            <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-2xl text-[#1B2A49] mb-3">
+              Educational Tools
+            </h2>
+            <p className="font-[family-name:var(--font-roboto)] text-[#333333]">
+              Interactive sense-making experiences and TEBO programs
             </p>
           </Link>
         </div>
