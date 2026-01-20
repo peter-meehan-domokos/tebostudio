@@ -1,9 +1,10 @@
 'use client';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+import { PROJECT_CONFIG } from "@/app/projects/[slug]/project-config";
 
 // Dynamically import components that use context
-const Game = dynamic(() => import("./components/Game"), { ssr: false });
+//const Game = dynamic(() => import("./components/Game"), { ssr: false });
 const ProjectIntro = dynamic(() => import("../../ProjectIntro"), { ssr: false });
 
 export default function StrategySim() {
@@ -26,13 +27,7 @@ export default function StrategySim() {
   if (showIntro) {
     return (
       <ProjectIntro
-        slides={[
-          {
-            key: "strategysim-intro",
-            title: "Strategy Simulation",
-            paragraphs: ["Welcome to the Strategy Simulation game!"]
-          }
-        ]}
+        slides={PROJECT_CONFIG.strategysim.introSlides}
         onClose={() => setShowIntro(false)}
       />
     );

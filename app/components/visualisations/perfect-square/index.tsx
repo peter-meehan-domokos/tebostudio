@@ -9,6 +9,7 @@ import "./perfect-square.css";
 
 export default function PerfectSquare() {
   const { showIntro, setShowIntro } = useProject();
+  console.log('PerfectSquare - showIntro:', showIntro);
   
   if (showIntro) {
     return (

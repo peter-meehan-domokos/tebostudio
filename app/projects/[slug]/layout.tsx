@@ -4,6 +4,7 @@ import { ProjectProvider, useProject } from "./ProjectContext";
 
 function ProjectNav() {
   const { showIntro, setShowIntro } = useProject();
+  console.log('ProjectNav - showIntro:', showIntro);
   
   return (
     <div className="absolute top-6 left-6 z-50 flex gap-4">
@@ -19,7 +20,7 @@ function ProjectNav() {
           showIntro ? 'text-[#39A6A3]' : 'text-[#1B2A49] hover:text-[#39A6A3]'
         }`}
       >
-        Intro
+        Intro layout not rerendering/updating when Begin clicked
       </button>
       {showIntro && (
         <button

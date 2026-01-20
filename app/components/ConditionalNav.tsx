@@ -11,8 +11,6 @@ export default function ConditionalNav() {
     !pathname?.endsWith('/projects') &&
     !pathname?.endsWith('/projects/');
 
-  console.log('ConditionalNav - pathname:', pathname, 'isProjectDetailPage:', isProjectDetailPage);
-
   if (isProjectDetailPage) {
     return null;
   }
