@@ -45,10 +45,10 @@ export default function ProjectIntro({ slides, onClose, initD3, cleanupD3, mobil
           {slides.map((slide, index) => {
             const isLastSlide = index === slides.length - 1;
             const controlButtons = [{
-              label: isLastSlide ? "Begin" : "Next",
+              label: isLastSlide ? "View" : "Next",
               onClick: handleNext,
               className: isLastSlide ? "last-slide-controls" : "slide-controls",
-              style: isLastSlide ? { background: "#BF40BF" } : { border: "solid", borderWidth: 0.8 }
+              style: isLastSlide ? { background: "#BF40BF", color: "#FFFFFF" } : { border: "solid", borderWidth: 0.8 }
             }];
             
             return (

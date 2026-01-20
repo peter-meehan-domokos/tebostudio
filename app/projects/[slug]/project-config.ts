@@ -24,11 +24,13 @@ export interface ProjectConfig {
   githubUrl: string;
   introSlides: IntroSlide[];
   mobileWarning?: string;
+  docsUrl?: string;
 }
 
 export const PROJECT_CONFIG: Record<string, ProjectConfig> = {
   perfectsquare: {
-    githubUrl: "https://github.com/peter-meehan-domokos/perfect-square",
+    githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/visualisations/perfect-square",
+    docsUrl: "https://github.com/peter-meehan-domokos/perfect-square/blob/main/README.md",
     introSlides: [
       {
         key: "slide-1",
@@ -69,7 +71,7 @@ export const PROJECT_CONFIG: Record<string, ProjectConfig> = {
     ],
   },
   strategysim: {
-    githubUrl: "https://github.com/yourprofile/strategysim",
+    githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/learning-tebos/strategysim",
     mobileWarning: "Mobiles and tablets not supported",
     introSlides: [
       {
@@ -111,14 +113,14 @@ export const PROJECT_CONFIG: Record<string, ProjectConfig> = {
     ],
   },
   therace: {
-    githubUrl: "https://github.com/yourprofile/therace",
+    githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/visualisations/the-race",
     mobileWarning: "Mobiles and tablets not supported",
     introSlides: [
       {
         key: "slide-1",
         title: "What The Race is",
         paragraphs: [
-          "The Race turns match stats into a fun race.",
+          "The Race turns match stats into an engaging race.",
           "It makes KPIs feel emotional and memorable.",
           "Watch performance change across the match.",
         ],

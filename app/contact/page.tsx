@@ -114,7 +114,7 @@ export default function Contact() {
                 </h3>
                 <div className="flex gap-4">
                   <a 
-                    href="https://linkedin.com/in/yourprofile" 
+                    href="https://www.linkedin.com/in/petedomokos/" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors"
@@ -125,7 +125,7 @@ export default function Contact() {
                     </svg>
                   </a>
                   <a 
-                    href="https://facebook.com/yourprofile" 
+                    href="https://www.facebook.com/peter.meehan.domokos?" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors"
@@ -136,7 +136,7 @@ export default function Contact() {
                     </svg>
                   </a>
                   <a 
-                    href="https://github.com/yourusername" 
+                    href="https://github.com/peter-meehan-domokos" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors"

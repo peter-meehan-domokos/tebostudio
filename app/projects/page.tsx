@@ -9,13 +9,17 @@ export default function Projects() {
       subtitle: "Multivariate Data Comparison & Grouping Tool",
       description1: "The Perfect Square visualises high-dimensional data as a square that fills toward an ideal target state. Compare thousands of profiles at a glance, then zoom in for detailed KPIs. Useful for rehabilitation monitoring, recruitment profiling, and seeing vector similarity for LLM tokens.",
       description2: "Built with React, TypeScript, D3, and Next, with data fetched via GraphQL from a Node server (with Python analytics). Performance is optimised in SVG (no canvas) using semantic zoom, virtualised rendering, and D3’s enter–update–exit pattern for efficient updates at scale.",
-      imagePlaceholder: "from-[#1B2A49] to-[#39A6A3]",      imageSrc: "/tebostudio/projects/perfect-square.png",    },
+      githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/visualisations/perfect-square",
+      imagePlaceholder: "from-[#1B2A49] to-[#39A6A3]",
+      imageSrc: "/tebostudio/projects/perfect-square.png",
+    },
     {
       id: "strategysim",
       title: "Strategy Sim",
       subtitle: "AI Sports Strategy Learning Tool (Prototype)",
       description1: "StrategySim is a protoype for a simulation game for young people who play sport to explore strategy through intuition and AI. Players test tactics in a real-world target challenge, then simulate them repeatedly to see what performs best—making sports data science competitive, tangible, and easy to discuss.",
       description2: "The platform integrates real-time strategy simulation, results clustering, and comparative visualization to help learners understand the relationship between tactical decisions and outcomes. Designed for both individual exploration and classroom discussion.",
+      githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/learning-tebos/strategysim",
       imagePlaceholder: "from-[#39A6A3] to-[#1B2A49]",
       imageSrc: "/tebostudio/projects/strategy-sim.png",
     },
@@ -25,6 +29,7 @@ export default function Projects() {
       subtitle: "Animated KPI Race Replay",
       description1: "The Race turns post-match KPIs into a fast animated 'race replay'. As match time advances, cumulative performance changes are felt through overtakes and leads—making improvements and drop-offs obvious. It's a fun, emotional format for reflection and post-match discussion.",
       description2: "Particularly effective for tracking progress over time across multiple entities, this visualization style combines clear visual hierarchy with interactive controls, allowing users to explore data at different temporal scales and compare key metrics dynamically.",
+      githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/visualisations/the-race",
       imagePlaceholder: "from-[#FFB84D] to-[#FF6F61]",
       imageSrc: "/tebostudio/projects/the-race.png",
     },
@@ -98,7 +103,7 @@ export default function Projects() {
                 <p className="font-[family-name:var(--font-montserrat)] font-medium text-lg text-[#39A6A3] mb-6">
                   {project.subtitle}
                 </p>
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <p className="font-[family-name:var(--font-roboto)] text-base text-[#333333] leading-relaxed">
                     {project.description1}
                   </p>
@@ -107,15 +112,32 @@ export default function Projects() {
                   </p>
                 </div>
                 {project.id !== "placeholder" && (
-                  <a
-                    href={`/projects/${project.id}`}
-                    className="inline-flex items-center gap-2 text-[#39A6A3] hover:text-[#329d9a] font-[family-name:var(--font-montserrat)] font-semibold transition-colors"
-                  >
-                    Open Project
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <a
+                      href={`/tebostudio/projects/${project.id}`}
+                      className="inline-flex items-center gap-2 text-[#39A6A3] hover:text-[#329d9a] font-[family-name:var(--font-montserrat)] font-semibold transition-colors"
+                    >
+                      Open Project
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                    {project.githubUrl ? (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-[#39A6A3] hover:text-[#329d9a] font-[family-name:var(--font-montserrat)] font-semibold transition-colors"
+                      >
+                        View Github
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8L10 18" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
                 )}
               </div>
             </div>

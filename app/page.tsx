@@ -367,7 +367,7 @@ export default function Home() {
                 Contact Me
               </Link>
               <a
-                href="https://github.com/yourprofile"
+                href="https://github.com/peter-meehan-domokos"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-8 py-4 rounded-lg transition-colors text-center"
