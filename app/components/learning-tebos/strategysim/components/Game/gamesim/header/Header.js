@@ -64,7 +64,7 @@ const Header = ({
     <div
       style={{
         width: "100%",
-        padding: "12px 20px",
+        padding: "14px 20px",
         backgroundColor: "rgba(255, 255, 255, 0.95)",
         borderBottom: "1px solid rgba(128, 128, 128, 0.2)",
         display: "flex",

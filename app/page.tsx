@@ -8,13 +8,13 @@ export default function Home() {
     <div className="min-h-screen bg-[#F9F9F9]">
       {/* Hero / Header Section */}
       <section className="bg-white py-20 px-6 md:py-32">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div>
+        <div className="max-w-7xl mx-auto flex flex-col-reverse md:grid md:grid-cols-2 gap-12 items-center">
+          <div className="text-center md:text-left">
             <h1 className="font-[family-name:var(--font-montserrat)] font-bold text-5xl md:text-6xl text-[#1B2A49] mb-6 leading-tight">
               Making sense of a complex world
             </h1>
             <p className="font-[family-name:var(--font-roboto)] text-lg text-[#333333] mb-8">
-              Welcome to my studio, where I design and build data visualisations, and sense-making experiences supported by interactive tools — called TEBOs. For work and education.
+              Welcome to my studio, where I design and build data visualisations and sense-making experiences supported by interactive tools — called TEBOs. For work and education.
             </p>
             <Link
               href="/projects"
@@ -35,9 +35,12 @@ export default function Home() {
       {/* Portfolio / Case Studies Section */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-4xl text-[#1B2A49] mb-12 text-center">
+          <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-4xl text-[#1B2A49] mb-4 text-center">
             Featured Projects
           </h2>
+          <p className="font-[family-name:var(--font-roboto)] text-base text-[#333333] text-center max-w-3xl mx-auto mb-12">
+            These are from my work in the football/education industries — I've worked across other sectors, but those projects aren't accessible for public sharing. More examples will be added soon, or get in touch to see more.
+          </p>
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {/* Project Card 1 */}
@@ -45,14 +48,23 @@ export default function Home() {
               href="/projects/perfectsquare"
               className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
             >
-              <div className="bg-gradient-to-br from-[#1B2A49] to-[#39A6A3] aspect-video flex items-center justify-center">
+              <div className="relative flex items-center justify-center border-4 border-[#39A6A3]" style={{ aspectRatio: '16/10' }}>
+                <Image
+                  src="/projects/perfect-square.png"
+                  alt="Perfect Square Project"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="p-6 border-l-4 border-[#39A6A3]">
                 <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-xl text-[#1B2A49] mb-2">
                   Perfect Square
                 </h3>
+                <p className="font-[family-name:var(--font-montserrat)] font-medium text-lg text-[#39A6A3] mb-6">
+                  Multivariate Data Comparison & Grouping Tool
+                </p>
                 <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333]">
-                  Novel multivariate dataviz tool for comparing thousands of n-dimensional vectors against an "ideal" state
+                  The Perfect Square visualises high-dimensional data as a square that fills toward an ideal target state. Compare thousands of profiles at a glance, then zoom in for detailed KPIs. Useful for rehabilitation monitoring, recruitment profiling, and seeing vector similarity for LLM tokens.
                 </p>
               </div>
             </Link>
@@ -62,14 +74,23 @@ export default function Home() {
               href="/projects/strategysim"
               className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
             >
-              <div className="bg-gradient-to-br from-[#39A6A3] to-[#1B2A49] aspect-video flex items-center justify-center">
+              <div className="relative flex items-center justify-center border-4 border-[#39A6A3]" style={{ aspectRatio: '16/10' }}>
+                <Image
+                  src="/projects/strategy-sim.png"
+                  alt="Strategy Sim Project"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="p-6 border-l-4 border-[#39A6A3]">
                 <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-xl text-[#1B2A49] mb-2">
                   Strategy Sim
                 </h3>
+                <p className="font-[family-name:var(--font-montserrat)] font-medium text-lg text-[#39A6A3] mb-6">
+                  AI Sports Strategy Learning Tool (Prototype)
+                </p>
                 <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333]">
-                  Learning tool combining a classroom football game with personalised strategy simulation and clustering of results
+                  StrategySim is a protoype for a simulation game for young people who play sport to explore strategy through intuition and AI. Players test tactics in a real-world target challenge, then simulate them repeatedly to see what performs best—making sports data science competitive, tangible, and easy to discuss.
                 </p>
               </div>
             </Link>
@@ -79,26 +100,35 @@ export default function Home() {
               href="/projects/therace"
               className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
             >
-              <div className="bg-gradient-to-br from-[#FFB84D] to-[#FF6F61] aspect-video flex items-center justify-center">
+              <div className="relative flex items-center justify-center border-4 border-[#FFB84D]" style={{ aspectRatio: '16/10' }}>
+                <Image
+                  src="/projects/the-race.png"
+                  alt="The Race Project"
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="p-6 border-l-4 border-[#FFB84D]">
+              <div className="p-6 border-l-4 border-[#FFB84D] h-full">
                 <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-xl text-[#1B2A49] mb-2">
                   The Race
                 </h3>
+                <p className="font-[family-name:var(--font-montserrat)] font-medium text-lg text-[#39A6A3] mb-6">
+                  Animated KPI Race Replay
+                </p>
                 <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333]">
-                  Engaging and insightful way to depict cumulative time-series data for comparative purposes
+                  The Race turns post-match KPIs into a fast animated 'race replay'. As match time advances, cumulative performance changes are felt through overtakes and leads—making improvements and drop-offs obvious. It's a fun, emotional format for reflection and post-match discussion.
                 </p>
               </div>
             </Link>
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            {/* <Link
+            <Link
               href="/projects"
               className="inline-block bg-[#FFB84D] hover:bg-[#f5ab3d] text-[#1B2A49] font-[family-name:var(--font-montserrat)] font-semibold px-8 py-4 rounded-lg transition-colors text-center"
             >
               View all projects →
-            </Link> */}
+            </Link>
             <Link
               href="/contact"
               className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-8 py-4 rounded-lg transition-colors text-center"
@@ -112,19 +142,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hero Image Section */}
-      <section className="relative w-full h-[600px] overflow-hidden">
-        <Image
-          src="/me_hero_desktop.jpg"
-          alt="Peter Meehan-Domokos"
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* Gradient overlay on left side */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1B2A49]/75 via-[#1B2A49]/40 to-transparent md:via-[#1B2A49]/30 md:to-transparent" />
-        
-        {/* Content */}
+      {/* Hero Image Section - Mobile */}
+      <section className="hero-mobile bg-white">
+        <div className="w-full">
+          <Image
+            src="/me_hero_mobile.jpg"
+            alt="Peter Meehan-Domokos"
+            width={768}
+            height={1024}
+            className="w-full h-auto"
+            priority
+          />
+        </div>
+        <div className="px-6 py-8">
+          <h2 className="font-[family-name:var(--font-montserrat)] font-bold text-4xl text-[#1B2A49] mb-4">
+            Hi, I'm Peter
+          </h2>
+          <p className="font-[family-name:var(--font-roboto)] text-lg text-[#333333] mb-6 leading-relaxed">
+            I work with software teams, clients and academics across multiple sectors to turn complex data into clear, explorable interfaces — from high-quality core charts to bespoke visual systems. My work bridges analytics, technology and learning, grounded in strong information design, interaction design, and data literacy.
+          </p>
+          <Link
+            href="/about"
+            className="inline-block bg-[#39A6A3] hover:bg-[#329d9a] text-white font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 rounded-lg transition-colors shadow-lg"
+          >
+            Read More →
+          </Link>
+        </div>
+      </section>
+
+      {/* Hero Image Section - Desktop */}
+      <section className="hero-desktop relative w-full h-[600px] overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/me_hero_desktop.jpg"
+            alt="Peter Meehan-Domokos"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1B2A49]/75 via-[#1B2A49]/30 to-transparent" />
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-7xl mx-auto px-6 w-full">
             <div className="max-w-xl">
@@ -132,7 +189,7 @@ export default function Home() {
                 Hi, I'm Peter
               </h2>
               <p className="font-[family-name:var(--font-roboto)] text-lg md:text-xl text-white/95 mb-6 leading-relaxed drop-shadow-md">
-                I work with software teams across multiple sectors to turn complex data into clear, explorable interfaces — from high-quality core charts to bespoke visual systems. My work bridges analytics, technology and learning, grounded in strong information design, interaction design, and data literacy.
+                I work with software teams, clients and academics across multiple sectors to turn complex data into clear, explorable interfaces — from high-quality core charts to bespoke visual systems. My work bridges analytics, technology and learning, grounded in strong information design, interaction design, and data literacy.
               </p>
               <Link
                 href="/about"
@@ -236,14 +293,14 @@ export default function Home() {
             <div className="bg-[#F9F9F9] rounded-xl p-8 shadow-sm border border-gray-100">
               <div className="text-[#39A6A3] text-5xl mb-4">"</div>
               <p className="font-[family-name:var(--font-roboto)] text-[#333333] mb-6 leading-relaxed">
-                Working with Peter transformed how our team approaches data visualization. His ability to turn complex datasets into clear, actionable insights has been invaluable to our decision-making process.
+                Peter is an experienced and skilled data visualiser and developer, with a strong understanding of data science, data visualisation, sport science and football product development. He worked effectively with Premier League performance professionals, soliciting feedback and shaping feature priorities.
               </p>
               <div className="border-t border-gray-200 pt-4">
                 <p className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49]">
-                  Sarah Mitchell
+                  Raf Keustermans
                 </p>
                 <p className="font-[family-name:var(--font-roboto)] text-sm text-[#666666]">
-                  Head of Analytics, Tech Solutions Ltd
+                  CEO, Sportlight Technology Ltd
                 </p>
               </div>
             </div>
@@ -252,15 +309,24 @@ export default function Home() {
             <div className="bg-[#F9F9F9] rounded-xl p-8 shadow-sm border border-gray-100">
               <div className="text-[#39A6A3] text-5xl mb-4">"</div>
               <p className="font-[family-name:var(--font-roboto)] text-[#333333] mb-6 leading-relaxed">
-                The interactive tools Peter developed for our platform exceeded all expectations. Not only are they visually stunning, but they've dramatically improved how our users engage with and understand their data.
+                Peter’s session was exceptional — one of the most impactful elements of the programme. He designed an AI-driven simulation on statistical decision-making that let students see the immediate effects of tactical choices and data inputs.
               </p>
               <div className="border-t border-gray-200 pt-4">
                 <p className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49]">
-                  James Chen
+                  Yvonne Comer
                 </p>
                 <p className="font-[family-name:var(--font-roboto)] text-sm text-[#666666]">
-                  Product Director, DataFlow Systems
+                  Senior Innovation Catalyst, PorterShed
                 </p>
+                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#666666]">
+                  Board member, Irish Rugby Football Union
+                </p>
+                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#666666]">
+                Board member, Changing Ireland
+              </p>
+              <p className="font-[family-name:var(--font-roboto)] text-sm text-[#666666]">
+                Board member, Vision Sports Ireland
+              </p>
               </div>
             </div>
 
@@ -268,14 +334,12 @@ export default function Home() {
             <div className="bg-[#F9F9F9] rounded-xl p-8 shadow-sm border border-gray-100">
               <div className="text-[#39A6A3] text-5xl mb-4">"</div>
               <p className="font-[family-name:var(--font-roboto)] text-[#333333] mb-6 leading-relaxed">
-                Peter's expertise in both technical implementation and educational design is unique. The learning tools he created have helped countless students build genuine confidence in working with complex concepts.
-              </p>
-              <div className="border-t border-gray-200 pt-4">
+                Peter significantly raised standards in Mathematics, engaging students who were previously making low levels of progress through his ‘Switch Play’ project. He had a positive impact on students’ self-esteem and confidence.”              </p>              <div className="border-t border-gray-200 pt-4">
                 <p className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49]">
-                  Dr. Emily Roberts
+                  Clare Verga
                 </p>
                 <p className="font-[family-name:var(--font-roboto)] text-sm text-[#666666]">
-                  Director of Learning Innovation, EdTech Academy
+                  Executive Principal, City of London Academy Islington
                 </p>
               </div>
             </div>
@@ -328,7 +392,7 @@ export default function Home() {
               Questions, collaboration ideas, or inquiries about programs and visualisations? Let's connect.
             </p>
             <p className="font-[family-name:var(--font-roboto)] text-sm opacity-60 text-center mt-4">
-              © {new Date().getFullYear()} TEBO Studio. All rights reserved.
+              © {new Date().getFullYear()} Peter Meehan-Domokos. All rights reserved.
             </p>
           </div>
         </div>

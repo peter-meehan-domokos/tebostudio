@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Roboto } from "next/font/google";
+import { Montserrat, Roboto, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import ConditionalNav from "./components/ConditionalNav";
 
@@ -18,6 +18,14 @@ const roboto = Roboto({
   display: "swap",
 });
 
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "TEBO Studio - Making sense of a complex world",
   description: "Data visualisations, interactive tools, and sense-making experiences designed to bring complex ideas to life.",
@@ -31,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.variable} ${roboto.variable} antialiased`}
+        className={`${montserrat.variable} ${roboto.variable} ${robotoMono.variable} antialiased`}
       >
         <ConditionalNav />
         

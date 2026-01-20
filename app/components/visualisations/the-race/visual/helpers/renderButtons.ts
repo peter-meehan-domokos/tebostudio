@@ -12,7 +12,7 @@ export const renderButtons = (
     svg: Selection<SVGSVGElement, unknown, null, undefined>,
     buttonData: ButtonDatum[],
     containerWidth: number,
-    buttonWidth: number = 120,
+    buttonWidth: number = 72,
     buttonHeight: number = 30,
     buttonMargin: number = 10
 ) => {
@@ -30,7 +30,9 @@ export const renderButtons = (
         .attr('width', buttonWidth)
         .attr('height', buttonHeight)
         .attr('rx', 5)
-        .style('fill', d => d.color)
+        .style('fill', 'transparent')
+        .style('stroke', '#1B2A49')
+        .style('stroke-width', '1px')
         .style('cursor', 'pointer');
 
     buttonGroup.selectAll('text')
@@ -40,7 +42,10 @@ export const renderButtons = (
         .attr('y', buttonHeight/2)
         .attr('dy', '0.35em')
         .attr('text-anchor', 'middle')
-        .style('fill', 'white')
+        .style('fill', '#1B2A49')
+        .style('font-weight', '400')
+        .style('font-size', '14px')
+        .style('font-family', 'sans-serif')
         .style('cursor', 'pointer')
         .text(d => d.label);
 

@@ -6,7 +6,7 @@ const SimulationContainer = () => {
   // Move simulation state up from GameSim
   const [runMode, setRunMode] = useState("stopped");
   const runModeRef = useRef("stopped");
-  const [speedMultiplier, setSpeedMultiplier] = useState(1);
+  const [speedMultiplier, setSpeedMultiplier] = useState(5);
 
   // Pass handlers down to GameSim
   const handlePlaySimulation = () => {

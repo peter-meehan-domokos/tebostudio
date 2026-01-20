@@ -48,7 +48,7 @@ export const INTRO_SLIDES = [
       "This is a personal project and still under development.",
       "The chrome browser on a laptop or PC is recommended.",
       "Do give me some feedback!",
-    ],
+    ]/*,
     footer: {
       key: "contact",
       image: {
@@ -69,6 +69,6 @@ export const INTRO_SLIDES = [
         { key: "phone", label: "Call +44 7547 196642" },
         { key: "email", label: "petedomokos@gmail.com" },
       ],
-    },
+    },/*
   },
 ];

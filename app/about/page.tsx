@@ -65,54 +65,55 @@ export default function About() {
         </h1>
 
         {/* Tab Navigation */}
-        <div className="sticky top-0 z-10 bg-[#F9F9F9] pb-4 -mx-6 px-6">
-          <div className="flex gap-4 border-b border-gray-200 justify-center">
+        <div className="md:sticky top-0 z-10 bg-[#F9F9F9] pb-4 -mx-6 px-6">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-4 md:border-b border-gray-200 md:justify-center">
             <button
               onClick={() => handleTabClick("overview")}
-              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all ${
+              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all rounded-lg md:rounded-none ${
                 activeSection === "overview"
-                  ? "text-[#39A6A3] border-b-2 border-[#39A6A3]"
-                  : "text-[#333333] hover:text-[#39A6A3]"
+                  ? "text-[#39A6A3] bg-[#39A6A3]/10 md:bg-transparent md:border-b-2 border-[#39A6A3]"
+                  : "text-[#333333] hover:text-[#39A6A3] hover:bg-gray-100 md:hover:bg-transparent"
               }`}
             >
               Overview
             </button>
             <button
               onClick={() => handleTabClick("tebos")}
-              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all ${
+              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all rounded-lg md:rounded-none ${
                 activeSection === "tebos"
-                  ? "text-[#39A6A3] border-b-2 border-[#39A6A3]"
-                  : "text-[#333333] hover:text-[#39A6A3]"
+                  ? "text-[#39A6A3] bg-[#39A6A3]/10 md:bg-transparent md:border-b-2 border-[#39A6A3]"
+                  : "text-[#333333] hover:text-[#39A6A3] hover:bg-gray-100 md:hover:bg-transparent"
               }`}
             >
               TEBOs
             </button>
             <button
               onClick={() => handleTabClick("work")}
-              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all ${
+              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all rounded-lg md:rounded-none ${
                 activeSection === "work"
-                  ? "text-[#39A6A3] border-b-2 border-[#39A6A3]"
-                  : "text-[#333333] hover:text-[#39A6A3]"
+                  ? "text-[#39A6A3] bg-[#39A6A3]/10 md:bg-transparent md:border-b-2 border-[#39A6A3]"
+                  : "text-[#333333] hover:text-[#39A6A3] hover:bg-gray-100 md:hover:bg-transparent"
               }`}
             >
               Work
             </button>
             <button
               onClick={() => handleTabClick("method")}
-              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all ${
+              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all rounded-lg md:rounded-none ${
                 activeSection === "method"
-                  ? "text-[#39A6A3] border-b-2 border-[#39A6A3]"
-                  : "text-[#333333] hover:text-[#39A6A3]"
+                  ? "text-[#39A6A3] bg-[#39A6A3]/10 md:bg-transparent md:border-b-2 border-[#39A6A3]"
+                  : "text-[#333333] hover:text-[#39A6A3] hover:bg-gray-100 md:hover:bg-transparent"
               }`}
+              style={{ display: "none" }}
             >
               Method
             </button>
             <button
               onClick={() => handleTabClick("story")}
-              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all ${
+              className={`font-[family-name:var(--font-montserrat)] font-semibold px-6 py-3 transition-all rounded-lg md:rounded-none ${
                 activeSection === "story"
-                  ? "text-[#39A6A3] border-b-2 border-[#39A6A3]"
-                  : "text-[#333333] hover:text-[#39A6A3]"
+                  ? "text-[#39A6A3] bg-[#39A6A3]/10 md:bg-transparent md:border-b-2 border-[#39A6A3]"
+                  : "text-[#333333] hover:text-[#39A6A3] hover:bg-gray-100 md:hover:bg-transparent"
               }`}
             >
               Story
@@ -132,10 +133,10 @@ export default function About() {
                 TEBO Studio is my design-and-build practice for data visualisation and interactive tools.
               </p>
               <p>
-                I work with software teams to turn complex data into clear, explorable interfaces — from high-quality core charts to bespoke visual systems and interactions when off-the-shelf approaches aren't enough.
+                I turn complex data into clear, explorable interfaces — from high-quality core charts to bespoke visual systems and interactions when off-the-shelf approaches aren't enough.
               </p>
               <p>
-                My background combines frontend engineering (D3/TypeScript/React) with deep strengths in the foundations of data visualisation: information design, UX/interaction, data flow, and data literacy — all focused on helping people understand what the data is really saying.
+                My background combines frontend engineering (D3/TypeScript/React) with deep strengths in the foundations of data visualisation: information design, UX, visual science, data flow, data literacy & maths education — all focused on helping people understand what the data is really saying.
               </p>
               <p>
                 Alongside product work, TEBO Studio also includes learning-focused tools and experiences, where interactivity becomes a way to develop insight, confidence, and agency.
@@ -177,16 +178,16 @@ export default function About() {
             </h2>
             <div className="space-y-4 font-[family-name:var(--font-roboto)] text-[#333333] leading-relaxed">
               <p>
-                TEBO stands for <strong>Technology Enhanced Boundary Object</strong> — a term introduced by Celia Hoyles, Richard Noss, and colleagues at the UCL Institute of Education.
+                TEBO stands for <strong>Technology-Enhanced Boundary Object</strong> — a term introduced by Celia Hoyles, Richard Noss, and colleagues at the UCL Institute of Education.
               </p>
               <p>
-                A boundary object is something that helps people coordinate understanding across different perspectives — especially when they don't share the same background or language. In practice, this means a boundary object can help someone move between fields: for example, helping a non-specialist engage meaningfully with data, models, or technical reasoning without needing to become an expert.
+                A boundary object is something that helps people coordinate understanding across different perspectives — especially when they don't share the same background or language. In practice, this means a boundary object can help someone move between fields: for example, helping a non-specialist engage meaningfully with data, models, or technical reasoning without needing to become an expert in data science.
               </p>
               <p>
                 A TEBO is a boundary object with interactivity: a tool you can explore, manipulate, and learn from. It supports interdisciplinary collaboration by making ideas relatable across roles — so people can question, test, and reason, rather than simply accept what a chart or an expert tells them.
               </p>
               <p>
-                In TEBO Studio, TEBOs are interactive tools designed to help people cross a boundary in understanding — between:
+                In TEBO Studio, TEBOs bridge the gap between:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>data and meaning</li>
@@ -194,10 +195,10 @@ export default function About() {
                 <li>domain knowledge and technical modelling</li>
               </ul>
               <p>
-                Some TEBOs look like visualisations. Some look like simulations. Some look like learning tools. What they share is this: they turn abstract structure into something people can interact with — and therefore reason about.
+                Some TEBOs look like visualisations. Some look like simulations. Some look like learning tools. What they share is this: they turn abstract or hidden structure into something people can interact with — and therefore reason about.
               </p>
               <p>
-                The idea connects to sociocultural theories of learning and development: understanding is built through tools, representations, and shared activity.
+                The idea connects to sociocultural theories of learning and development: understanding is built through tools, structures, and shared activity.
               </p>
 
               {/* Subsection */}
@@ -216,7 +217,7 @@ export default function About() {
                     Just as importantly, data visualisation is a specialist craft. Teams often iterate and gather feedback — but dataviz requires a particular lens: knowing what questions to ask, what misconceptions to watch for, and how to tell whether a chart is supporting clear reasoning (or quietly misleading people). Without that specialist focus, issues like unclear encodings, hidden assumptions, or misleading scales can go unchallenged and reduce trust and insight.
                   </p>
                   <p>
-                    Thinking in TEBO terms — and designing with strong visual science, interaction design, and data literacy — elevates data features from "graphs on a page" into tools that help people think. The result is clearer decision-making, fewer "black boxes", and stronger collaboration both within product teams and across the wider organisation using the tool.
+                    Thinking in TEBO terms — and designing with strong visual science, interaction design, and data literacy — elevates data features from "graphs on a page" into tools that help people think. The result is clearer decision-making, fewer "black boxes", and stronger collaboration.
                   </p>
                 </div>
               </div>
@@ -243,20 +244,17 @@ export default function About() {
                 <li>consultancy on information design and visual decision-making (what to show, how to show it, and why)</li>
               </ul>
               <p>
-                I'm comfortable working end-to-end on data-driven features — from the UI through to the underlying data logic and analysis — and collaborating closely with data/backend teams when a visualisation depends on definitions, transformations, or pipeline behaviour. I also work upstream of implementation: clarifying goals with domain experts, surfacing assumptions, and shaping the right visual + interaction model iteratively. Dataviz often succeeds or fails at this stage, and I bring a specialist lens to requirements discovery — ensuring the visual interface genuinely serves the user's goals and decision-making needs.
+                I'm comfortable working end-to-end on data-driven features — including the underlying analysis — and collaborating closely with data/backend teams when a visualisation depends on definitions, transformations, or pipeline behaviour. I also work upstream of implementation: clarifying goals with domain experts, surfacing assumptions, and shaping the right visual + interaction model iteratively. Dataviz often succeeds or fails at this stage, and I bring a specialist lens to requirements discovery — ensuring the user's purpose is supported.
               </p>
               <p>
-                Typical stack: TypeScript, React, D3.js, SVG/Canvas/WebGL, Python/SQL (as needed), with close attention to maintainable code and scalable patterns.
+                Typical stack: TypeScript, React, D3.js, SVG/Canvas/WebGL, Python/SQL (as needed), with close attention to maintainable code and scalable patterns. I'm comfortable with most chart, geoviz, and data libraries.
               </p>
 
               <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-2xl text-[#1B2A49] mt-10 mb-4">
                 Learning tools & programmes
               </h3>
               <p>
-                Alongside product work, I also design learning tools and programmes that use interactive visuals to build understanding, confidence, and agency.
-              </p>
-              <p>
-                These programmes are supported by TEBOs (Technology Enhanced Boundary Objects): tools that help learners explore an idea through interaction, not just explanation.
+                Alongside product work, I also design learning tools and programmes that build understanding, confidence, and agency.
               </p>
               <p>Current programmes include:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
@@ -266,21 +264,11 @@ export default function About() {
               <p>
                 These tools and experiences are designed to work in real settings: not just "edtech content", but robust interactive tools and activities that support facilitators and learners.
               </p>
-
-              <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-2xl text-[#1B2A49] mt-10 mb-4">
-                Selected projects (examples)
-              </h3>
-              <p>
-                <strong>PerfectSquare</strong> — novel multivariate dataviz tool for comparing thousands of n-dimensional vectors against an "ideal" state (Next.js/React/D3/TypeScript, GraphQL).
-              </p>
-              <p>
-                <strong>GameSim</strong> — learning tool combining a classroom football game with personalised strategy simulation and clustering of results (React/D3, Python).
-              </p>
             </div>
           </section>
 
           {/* Method Section */}
-          <section id="method" className="scroll-mt-24 mt-16">
+          <section id="method" className="scroll-mt-24 mt-16" style={{ display: "none" }}>
             <h2 className="font-[family-name:var(--font-montserrat)] font-semibold text-3xl text-[#1B2A49] mb-6">
               Why it Works
             </h2>
@@ -366,7 +354,7 @@ export default function About() {
                 <li>how people actually interpret graphs and abstractions</li>
               </ul>
               <p>
-                Later, I moved into learning technology and software, completed an MSc in Learning Technologies, and retrained as a programmer. I began building interactive tools not just as "interfaces", but as ways of thinking.
+                Later, I moved into software, completed an MSc in learning technologies and computer science, and retrained as a programmer. I began building interactive tools not just as "interfaces", but as ways of thinking.
               </p>
               <p>
                 Since then, I've worked as a frontend and data visualisation engineer and also built founder-led work — notably Switchplay, a football data platform. Across domains (sport, public transport, analytics platforms), the common thread has stayed the same:

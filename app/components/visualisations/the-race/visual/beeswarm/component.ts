@@ -89,7 +89,7 @@ export const beeswarmComponent = (): BeeswarmChart => {
                         .attr("x", 0)
                         .attr("y", 0)
                         .style("font-size", "14px")
-                        .style("fill", "#EDEDED")
+                        .style("fill", "currentColor")
                         .text((d, i) => `${i + 1}.`);
                     
                     // Add player name
@@ -98,15 +98,15 @@ export const beeswarmComponent = (): BeeswarmChart => {
                         .attr("x", 25)
                         .attr("y", 0)
                         .style("font-size", "14px")
-                        .style("fill", "#EDEDED");
+                        .style("fill", "currentColor");
                     
                     // Add score
                     g.append("text")
                         .attr("class", "score")
-                        .attr("x", 150)
+                        .attr("x", 190)
                         .attr("y", 0)
                         .style("font-size", "14px")
-                        .style("fill", "#EDEDED")
+                        .style("fill", "currentColor")
                         .style("text-anchor", "end");
                     
                     return g;
@@ -118,6 +118,7 @@ export const beeswarmComponent = (): BeeswarmChart => {
             .text(d => `${d.player.firstName} ${d.player.surname}`);
         
         positions.select(".score")
+            .attr("x", 190)
             .text(d => d.value?.toString() ?? 'No value');
     }
 
@@ -181,7 +182,7 @@ export const beeswarmComponent = (): BeeswarmChart => {
                 .call(yAxis);
 
             // Update title
-            const titleColor = "#EDEDED";
+            const titleColor = "currentColor"; // Match axis color (black/dark)
             svg.select(".title")
                 .style("fill", titleColor)
                 .text(data.name);

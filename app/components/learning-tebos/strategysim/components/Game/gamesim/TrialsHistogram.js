@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ReactEcharts from "echarts-for-react";
 
 const MIN_SCORE = 0;
-const MAX_SCORE = 20;
+const MAX_SCORE = 12;
 const MAX_TRIALS = 40;
 
 const TrialsHistogram = ({ trialsLog }) => {
@@ -26,12 +26,12 @@ const TrialsHistogram = ({ trialsLog }) => {
     }
     // Cap counts at MAX_TRIALS for display
     const cappedCounts = scoreCounts.map((count) =>
-      Math.min(count, MAX_TRIALS)
+      Math.min(count, MAX_TRIALS),
     );
     // X-axis labels: scores 3–18
     const scoreLabels = Array.from(
       { length: MAX_SCORE - MIN_SCORE + 1 },
-      (_, i) => (MIN_SCORE + i).toString()
+      (_, i) => (MIN_SCORE + i).toString(),
     );
     return {
       buckets: scoreLabels,
@@ -180,7 +180,7 @@ TrialsHistogram.propTypes = {
       events: PropTypes.array.isRequired,
       errorCount: PropTypes.number.isRequired,
       score: PropTypes.number, // Add score prop
-    })
+    }),
   ).isRequired,
 };
 

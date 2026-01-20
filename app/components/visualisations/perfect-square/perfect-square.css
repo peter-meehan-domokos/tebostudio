@@ -253,7 +253,7 @@
 
 
 .perfect-square-root .header {
-  background-color: #282c34; /* green-blue */
+  background-color: #F5F5F5; /* match vis-root background */
   width:100%;
   height:80px;
   display:flex;
@@ -266,9 +266,25 @@
   height: calc(100% - 80px);
   margin:0;
   padding:0 2.5%;
-  background-color: #282c34; /* green-blue */
+  background-color: #F5F5F5; /* match vis-root background */
+  position: relative;
   @media only screen and (max-width: 990px) {
     padding:0;
+  }
+}
+
+/* Create full-width header background effect */
+.perfect-square-root main::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 170px;
+  background-color: #F0F0F0;
+  z-index: 0;
+  @media only screen and (max-width: 990px) {
+    display: none;
   }
 }
 
@@ -293,7 +309,7 @@
   align-items: center;
   justify-content: center;
   padding:0 6px;
-  color:white;
+  color:#1B2A49;
   font-size: calc(2vmin);
   @media only screen and (max-width: 768px) {
     font-size: calc(2.5vmin);
@@ -313,7 +329,7 @@
 
 .perfect-square-root .header .menu .item {
   margin:0px 20px;
-  color:silver;
+  color:#666666;
   cursor:pointer;
   font-size: calc(1.5vmin);
   @media only screen and (max-width: 768px) {
@@ -322,7 +338,7 @@
 }
 
 .perfect-square-root .header .menu .item.selected {
-  color:white;
+  color:#1B2A49;
 }
 
 .perfect-square-root .vis-root {
@@ -330,6 +346,8 @@
   height:100%;
   background:#F5F5F5; /* smoke white */
   border-radius:5px;
+  position: relative;
+  z-index: 1;
   @media only screen and (max-width: 990px) {
     height:100%;
   }

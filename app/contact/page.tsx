@@ -28,67 +28,50 @@ export default function Contact() {
 
               {/* Contact Information Grid */}
               <div className="grid md:grid-cols-2 gap-8 pt-6 border-t border-gray-200">
-                {/* Email */}
+                {/* Contact */}
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[#39A6A3]/10 rounded-lg flex items-center justify-center">
                     <svg className="w-6 h-6 text-[#39A6A3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <div>
-                    <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49] mb-1">
-                      Email
+                  <div className="flex-1">
+                    <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49] mb-3">
+                      Contact
                     </h3>
-                    <a 
-                      href="mailto:your.email@example.com" 
-                      className="font-[family-name:var(--font-roboto)] text-[#39A6A3] hover:text-[#329d9a] transition-colors"
-                    >
-                      your.email@example.com
-                    </a>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="font-[family-name:var(--font-roboto)] text-xs text-[#666666] mb-1">Email</p>
+                        <a 
+                          href="mailto:p.meehan.domokos@gmail.com" 
+                          className="font-[family-name:var(--font-roboto)] text-[#39A6A3] hover:text-[#329d9a] transition-colors"
+                        >
+                          p.meehan.domokos@gmail.com
+                        </a>
+                      </div>
+                      <div>
+                        <p className="font-[family-name:var(--font-roboto)] text-xs text-[#666666] mb-1">Phone (UK)</p>
+                        <a 
+                          href="tel:+447547196642" 
+                          className="font-[family-name:var(--font-roboto)] text-[#39A6A3] hover:text-[#329d9a] transition-colors"
+                        >
+                          +44 7547 196642
+                        </a>
+                      </div>
+                      <div>
+                        <p className="font-[family-name:var(--font-roboto)] text-xs text-[#666666] mb-1">Phone (Ireland)</p>
+                        <a 
+                          href="tel:+353852076241" 
+                          className="font-[family-name:var(--font-roboto)] text-[#39A6A3] hover:text-[#329d9a] transition-colors"
+                        >
+                          +353 85 207 6241
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Phone 1 */}
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-[#39A6A3]/10 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-[#39A6A3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49] mb-1">
-                      Phone
-                    </h3>
-                    <a 
-                      href="tel:+441234567890" 
-                      className="font-[family-name:var(--font-roboto)] text-[#39A6A3] hover:text-[#329d9a] transition-colors"
-                    >
-                      +44 1234 567890
-                    </a>
-                  </div>
-                </div>
-
-                {/* Phone 2 */}
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-[#39A6A3]/10 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-[#39A6A3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49] mb-1">
-                      Mobile
-                    </h3>
-                    <a 
-                      href="tel:+447890123456" 
-                      className="font-[family-name:var(--font-roboto)] text-[#39A6A3] hover:text-[#329d9a] transition-colors"
-                    >
-                      +44 7890 123456
-                    </a>
-                  </div>
-                </div>
-
-                {/* Address */}
+                {/* Locations */}
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[#39A6A3]/10 rounded-lg flex items-center justify-center">
                     <svg className="w-6 h-6 text-[#39A6A3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,13 +79,30 @@ export default function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   </div>
-                  <div>
-                    <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49] mb-1">
-                      Location
+                  <div className="flex-1">
+                    <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-[#1B2A49] mb-3">
+                      Locations
                     </h3>
-                    <p className="font-[family-name:var(--font-roboto)] text-[#666666]">
-                      City, Country
-                    </p>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="font-[family-name:var(--font-roboto)] text-xs text-[#666666] mb-1">UK</p>
+                        <p className="font-[family-name:var(--font-roboto)] text-[#39A6A3]">
+                          35 Upper Street, 
+                        </p>
+                        <p className="font-[family-name:var(--font-roboto)] text-[#39A6A3]">
+                          Salisbury, SP2 8LS
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-[family-name:var(--font-roboto)] text-xs text-[#666666] mb-1">Ireland</p>
+                        <p className="font-[family-name:var(--font-roboto)] text-[#39A6A3]">
+                          5 Whitestrand Park,
+                        </p>
+                        <p className="font-[family-name:var(--font-roboto)] text-[#39A6A3]">
+                          Galway, H91 YX65
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -117,7 +117,7 @@ export default function Contact() {
                     href="https://linkedin.com/in/yourprofile" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors group"
+                    className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors"
                     aria-label="LinkedIn"
                   >
                     <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@ export default function Contact() {
                     href="https://facebook.com/yourprofile" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors group"
+                    className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors"
                     aria-label="Facebook"
                   >
                     <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -139,7 +139,7 @@ export default function Contact() {
                     href="https://github.com/yourusername" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors group"
+                    className="w-12 h-12 bg-[#39A6A3] hover:bg-[#329d9a] rounded-lg flex items-center justify-center transition-colors"
                     aria-label="GitHub"
                   >
                     <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">

@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const SimulationControls = ({
-  runMode = 'stopped',
+  runMode = "stopped",
   speedMultiplier = 1,
   onPlaySimulation = () => {},
   onLoopSimulation = () => {},
@@ -16,7 +16,7 @@ const SimulationControls = ({
 
   // Handle press and hold for increment
   const handleIncrementStart = () => {
-    if (runMode !== 'stopped' || speedMultiplier >= 50) return;
+    if (runMode !== "stopped" || speedMultiplier >= 50) return;
 
     // Clear any existing intervals/timeouts first
     handleIncrementEnd();
@@ -27,7 +27,7 @@ const SimulationControls = ({
     // Start repeating increment after a short delay
     incrementTimeoutRef.current = setTimeout(() => {
       incrementIntervalRef.current = setInterval(() => {
-        onSpeedChange(prev => {
+        onSpeedChange((prev) => {
           const newValue = Math.min(50, prev + 1);
           return newValue;
         });
@@ -48,7 +48,7 @@ const SimulationControls = ({
 
   // Handle press and hold for decrement
   const handleDecrementStart = () => {
-    if (runMode !== 'stopped' || speedMultiplier <= 0.25) return;
+    if (runMode !== "stopped" || speedMultiplier <= 0.25) return;
 
     // Clear any existing intervals/timeouts first
     handleDecrementEnd();
@@ -59,7 +59,7 @@ const SimulationControls = ({
     // Start repeating decrement after a short delay
     decrementTimeoutRef.current = setTimeout(() => {
       decrementIntervalRef.current = setInterval(() => {
-        onSpeedChange(prev => {
+        onSpeedChange((prev) => {
           const newValue = Math.max(0.25, prev - 1);
           return newValue;
         });
@@ -89,66 +89,66 @@ const SimulationControls = ({
   return (
     <div
       style={{
-        width: '100%',
-        padding: '8px 20px',
-        backgroundColor: 'rgba(248, 249, 250, 0.95)',
-        borderBottom: '1px solid rgba(128, 128, 128, 0.1)',
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        backdropFilter: 'blur(5px)',
-        gap: '12px',
+        width: "100%",
+        height: "72px",
+        backgroundColor: "rgba(248, 249, 250, 0.95)",
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        backdropFilter: "blur(5px)",
+        gap: "12px",
+        paddingRight: "20px",
       }}
     >
       {/* Play/Loop/Stop Controls */}
-      <div style={{ display: 'flex', gap: '6px' }}>
+      <div style={{ display: "flex", gap: "6px" }}>
         <button
           onClick={onPlaySimulation}
-          disabled={runMode !== 'stopped'}
+          disabled={runMode !== "stopped"}
           style={{
-            padding: '5px 10px',
-            fontSize: '11px',
-            fontWeight: 'bold',
-            backgroundColor: runMode !== 'stopped' ? '#cccccc' : '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: runMode !== 'stopped' ? 'not-allowed' : 'pointer',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+            padding: "8px 16px",
+            fontSize: "13px",
+            fontWeight: "bold",
+            backgroundColor: runMode !== "stopped" ? "#cccccc" : "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: runMode !== "stopped" ? "not-allowed" : "pointer",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
           }}
         >
-          Play
+          Play Once
         </button>
         <button
           onClick={onLoopSimulation}
-          disabled={runMode !== 'stopped'}
+          disabled={runMode !== "stopped"}
           style={{
-            padding: '5px 10px',
-            fontSize: '11px',
-            fontWeight: 'bold',
-            backgroundColor: runMode !== 'stopped' ? '#cccccc' : '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: runMode !== 'stopped' ? 'not-allowed' : 'pointer',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+            padding: "8px 16px",
+            fontSize: "13px",
+            fontWeight: "bold",
+            backgroundColor: runMode !== "stopped" ? "#cccccc" : "#28a745",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: runMode !== "stopped" ? "not-allowed" : "pointer",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
           }}
         >
-          Loop
+          Play Continuously
         </button>
         <button
           onClick={onStopSimulation}
-          disabled={runMode === 'stopped'}
+          disabled={runMode === "stopped"}
           style={{
-            padding: '5px 10px',
-            fontSize: '11px',
-            fontWeight: 'bold',
-            backgroundColor: runMode === 'stopped' ? '#cccccc' : '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: runMode === 'stopped' ? 'not-allowed' : 'pointer',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+            padding: "8px 16px",
+            fontSize: "13px",
+            fontWeight: "bold",
+            backgroundColor: runMode === "stopped" ? "#cccccc" : "#dc3545",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: runMode === "stopped" ? "not-allowed" : "pointer",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
           }}
         >
           Stop
@@ -158,48 +158,48 @@ const SimulationControls = ({
       {/* Speed Controls */}
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '3px',
+          display: "flex",
+          alignItems: "center",
+          gap: "3px",
         }}
       >
         <button
           onMouseDown={handleDecrementStart}
           onMouseUp={handleDecrementEnd}
           onMouseLeave={handleDecrementEnd}
-          disabled={runMode !== 'stopped' || speedMultiplier <= 0.25}
+          disabled={runMode !== "stopped" || speedMultiplier <= 0.25}
           style={{
-            padding: '3px 6px',
-            fontSize: '10px',
-            fontWeight: 'bold',
+            padding: "3px 6px",
+            fontSize: "10px",
+            fontWeight: "bold",
             backgroundColor:
-              runMode !== 'stopped' || speedMultiplier <= 0.25
-                ? '#cccccc'
-                : '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
+              runMode !== "stopped" || speedMultiplier <= 0.25
+                ? "#cccccc"
+                : "#28a745",
+            color: "white",
+            border: "none",
+            borderRadius: "3px",
             cursor:
-              runMode !== 'stopped' || speedMultiplier <= 0.25
-                ? 'not-allowed'
-                : 'pointer',
-            boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
-            userSelect: 'none', // Prevent text selection during hold
+              runMode !== "stopped" || speedMultiplier <= 0.25
+                ? "not-allowed"
+                : "pointer",
+            boxShadow: "0 1px 2px rgba(0,0,0,0.2)",
+            userSelect: "none", // Prevent text selection during hold
           }}
         >
           −
         </button>
         <span
           style={{
-            padding: '3px 6px',
-            fontSize: '10px',
-            fontWeight: 'bold',
-            backgroundColor: 'white',
-            color: '#333',
-            border: '1px solid #ddd',
-            borderRadius: '3px',
-            minWidth: '36px',
-            textAlign: 'center',
+            padding: "3px 6px",
+            fontSize: "10px",
+            fontWeight: "bold",
+            backgroundColor: "white",
+            color: "#333",
+            border: "1px solid #ddd",
+            borderRadius: "3px",
+            minWidth: "36px",
+            textAlign: "center",
           }}
         >
           {speedMultiplier.toFixed(1)}x
@@ -208,24 +208,24 @@ const SimulationControls = ({
           onMouseDown={handleIncrementStart}
           onMouseUp={handleIncrementEnd}
           onMouseLeave={handleIncrementEnd}
-          disabled={runMode !== 'stopped' || speedMultiplier >= 50}
+          disabled={runMode !== "stopped" || speedMultiplier >= 50}
           style={{
-            padding: '3px 6px',
-            fontSize: '10px',
-            fontWeight: 'bold',
+            padding: "3px 6px",
+            fontSize: "10px",
+            fontWeight: "bold",
             backgroundColor:
-              runMode !== 'stopped' || speedMultiplier >= 50
-                ? '#cccccc'
-                : '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
+              runMode !== "stopped" || speedMultiplier >= 50
+                ? "#cccccc"
+                : "#28a745",
+            color: "white",
+            border: "none",
+            borderRadius: "3px",
             cursor:
-              runMode !== 'stopped' || speedMultiplier >= 50
-                ? 'not-allowed'
-                : 'pointer',
-            boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
-            userSelect: 'none', // Prevent text selection during hold
+              runMode !== "stopped" || speedMultiplier >= 50
+                ? "not-allowed"
+                : "pointer",
+            boxShadow: "0 1px 2px rgba(0,0,0,0.2)",
+            userSelect: "none", // Prevent text selection during hold
           }}
         >
           +

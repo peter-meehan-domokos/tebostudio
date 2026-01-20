@@ -73,20 +73,24 @@ export const Visual: React.FC<Props> = ({ data }) => {
     useEffect(() => {
         if (!svgRef.current) return;
 
-        const PARENT_PADDING_PC = 0.05;
-        const containerWidth = window.innerWidth * (1 - (PARENT_PADDING_PC * 2));
-        const containerHeight = window.innerHeight * (1 - (PARENT_PADDING_PC * 2));
+        // Get actual container dimensions
+        const containerWidth = svgRef.current.parentElement?.clientWidth || window.innerWidth;
+        const containerHeight = svgRef.current.parentElement?.clientHeight || window.innerHeight;
 
-        // Use the full viewport width and height minus page margins and padding
-        const pageMargin = { left: 20, right: 20, top: 20, bottom: 20 };
-        const totalWidth = containerWidth - pageMargin.left - pageMargin.right;
-        const totalHeight = containerHeight - pageMargin.top - pageMargin.bottom;
-        const margin = { top: 80, right: 40, bottom: 80, left: 60 };
+        // No additional pageMargin - the parent already has p-8 padding
+        const totalWidth = containerWidth;
+        const totalHeight = containerHeight;
         
-        const availableWidth = totalWidth - margin.left - margin.right;
+        // Outer margins for positioning the chart groups
+        const outerMargin = { top: 100, right: 50, bottom: 80, left: 50 };
+        
+        // Inner margins for the beeswarm component (axis spacing, etc)
+        const innerMargin = { top: 75, right: 100, bottom: 120, left: 60 };
+        
+        const availableWidth = totalWidth - outerMargin.left - outerMargin.right;
         const chartSpacing = 40;
         const chartWidth = (availableWidth - (chartSpacing * 2)) / 3;
-        const chartHeight = totalHeight - margin.top - margin.bottom;
+        const chartHeight = totalHeight - outerMargin.top - outerMargin.bottom;
 
         const svg = d3.select(svgRef.current)
             .attr("width", totalWidth)
@@ -109,7 +113,7 @@ export const Visual: React.FC<Props> = ({ data }) => {
         beeswarm
             .width(chartWidth)
             .height(chartHeight)
-            .margin(margin)
+            .margin(innerMargin)
             .metrics(data.metrics)
             .transitionDuration(isPlaying ? stepDuration : 500);
 
@@ -119,11 +123,30 @@ export const Visual: React.FC<Props> = ({ data }) => {
             .join('g')
             .attr('class', d => `chart ${d.key}`)
             .attr('transform', (d, i) => {
-                const xPos = margin.left + (i * (chartWidth + chartSpacing));
-                const yPos = margin.top;
+                const xPos = outerMargin.left + (i * (chartWidth + chartSpacing));
+                const yPos = outerMargin.top;
                 return `translate(${xPos}, ${yPos})`;
             })
             .call(beeswarm);
+
+        // Add time counter under the play button, right-aligned
+        const buttonWidth = 72;
+        const buttonMargin = 10;
+        const buttonHeight = 30;
+        const counterX = containerWidth - buttonMargin; // Right edge of button
+        const counterY = buttonMargin + buttonHeight + 25; // Below button with spacing
+        
+        svg.selectAll('text.time-counter')
+            .data([currentTime])
+            .join('text')
+            .attr('class', 'time-counter')
+            .attr('x', counterX)
+            .attr('y', counterY)
+            .attr('text-anchor', 'end')
+            .style('font-size', '14px')
+            .style('fill', '#333333')
+            .style('font-family', 'sans-serif')
+            .text(d => `Match Time: ${d} minutes`);
 
         // Setup circle interactions
         setupCircleInteractions(svg);
@@ -141,24 +164,9 @@ export const Visual: React.FC<Props> = ({ data }) => {
                 ref={svgRef}
                 style={{ 
                     width: '100%',
-                    height: '100%',
-                    border: '1px solid #ccc'
+                    height: '100%'
                 }}
             />
-            {/* Time counter */}
-            <div style={{
-                position: 'absolute',
-                bottom: '10px',
-                right: '10px',
-                fontSize: '12px',
-                color: '#EDEDED',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '5px'
-            }}>
-                <span>Number of Minutes:</span>
-                <span style={{ fontWeight: 'bold' }}>{currentTime}</span>
-            </div>
         </div>
     );
 }; 

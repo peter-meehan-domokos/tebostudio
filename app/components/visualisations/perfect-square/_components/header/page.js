@@ -22,9 +22,6 @@ const Header = () => {
   } = useContext(AppContext);
   return (
     <header className="header">
-      <button className="intro-link" onClick={setIntroIsDisplayed}>
-        Back to intro
-      </button>
       <div className={`vis-title ${robotoBoldFont.className}`}>
         The Perfect Square Examples
       </div>

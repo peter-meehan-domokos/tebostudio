@@ -30,7 +30,7 @@ const GameSim = ({ runMode, runModeRef, speedMultiplier, onRunModeChange }) => {
 
   const handlePlayerChange = (updater) => {
     setPlayer((prevPlayer) =>
-      typeof updater === "function" ? updater(prevPlayer) : updater
+      typeof updater === "function" ? updater(prevPlayer) : updater,
     );
   };
 
@@ -121,7 +121,7 @@ const GameSim = ({ runMode, runModeRef, speedMultiplier, onRunModeChange }) => {
         if (runModeRef.current !== "stopped") {
           // Filter out events that exceeded time limit
           const validEvents = currentTrialEvents.filter(
-            (e) => !e.exceedsTimeLimit
+            (e) => !e.exceedsTimeLimit,
           );
           const finalDuration =
             validEvents.length > 0
@@ -144,7 +144,7 @@ const GameSim = ({ runMode, runModeRef, speedMultiplier, onRunModeChange }) => {
           // Start next trial immediately
           setTimeout(
             () => startSingleTrial(),
-            DURATIONS.INTERVALS.TRIAL_START_DELAY
+            DURATIONS.INTERVALS.TRIAL_START_DELAY,
           );
         } else {
           // Single trial completed, stop
@@ -223,7 +223,7 @@ const GameSim = ({ runMode, runModeRef, speedMultiplier, onRunModeChange }) => {
 
   return (
     <>
-      <div style={{ marginTop: "40px" }}>
+      <div>
         <Header
           simulationNumber={trialsLog.length + 1}
           simulationName={simulationName}
@@ -244,7 +244,7 @@ const GameSim = ({ runMode, runModeRef, speedMultiplier, onRunModeChange }) => {
           display: "flex",
           flexDirection: "row",
           gap: "20px",
-          padding: "20px",
+          padding: "0 20px 20px 20px",
         }}
         className="game-sim-container"
       >

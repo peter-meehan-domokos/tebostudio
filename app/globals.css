@@ -26,6 +26,26 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
+/* Hide desktop hero on mobile, show mobile hero */
+@media (max-width: 767px) {
+  .hero-desktop {
+    display: none !important;
+  }
+  .hero-mobile {
+    display: block !important;
+  }
+}
+
+/* Hide mobile hero on desktop, show desktop hero */
+@media (min-width: 768px) {
+  .hero-mobile {
+    display: none !important;
+  }
+  .hero-desktop {
+    display: block !important;
+  }
+}
+
 @layer utilities {
   /* Modal Animation Styles */
   @keyframes fadeIn {
