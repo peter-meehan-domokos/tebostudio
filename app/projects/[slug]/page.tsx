@@ -1,4 +1,4 @@
-import StrategySim from "../../components/learning-tebos/strategysim/page";
+import StrategySim from "../../components/learning-tebos/strategysim";
 import PerfectSquare from "../../components/visualisations/perfect-square";
 import TheRace from "../../components/visualisations/the-race";
 
