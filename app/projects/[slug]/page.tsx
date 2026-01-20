@@ -1,7 +1,6 @@
 import StrategySim from "../../components/learning-tebos/strategysim/page";
 import PerfectSquare from "../../components/visualisations/perfect-square";
 import TheRace from "../../components/visualisations/the-race";
-import { ProjectProvider } from "./ProjectContext";
 
 export async function generateStaticParams() {
   return [
@@ -38,9 +37,5 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     }
   };
 
-  return (
-    <ProjectProvider>
-      {renderProject()}
-    </ProjectProvider>
-  );
+  return renderProject();
 }

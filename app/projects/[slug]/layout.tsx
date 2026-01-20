@@ -20,7 +20,7 @@ function ProjectNav() {
           showIntro ? 'text-[#39A6A3]' : 'text-[#1B2A49] hover:text-[#39A6A3]'
         }`}
       >
-        Intro layout not rerendering/updating when Begin clicked
+        Intro
       </button>
       {showIntro && (
         <button
