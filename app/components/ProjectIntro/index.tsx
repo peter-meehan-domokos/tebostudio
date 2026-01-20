@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { IntroSlide } from '@/app/projects/[slug]/project-config';
-import SlideLayout from './slide/layout';
+import SlideLayout from './slide/SlideLayout';
 import Slide from './slide/page';
 import './intro.css';
 

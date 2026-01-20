@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from "react";
-import { DEFAULT_CONTAINER_MARGIN } from "../../../perfect-square/constants";
-import { applyMargin } from '../../../perfect-square/helpers';
-import { getElementDimns } from '../../../../_helpers/domHelpers';
-import { Container } from "../../../types";
+import { DEFAULT_CONTAINER_MARGIN } from "@/app/components/visualisations/perfect-square/_components/perfect-square/constants";
+import { applyMargin } from '@/app/components/visualisations/perfect-square/_components/perfect-square/helpers';
+import { getElementDimns } from '@/app/components/visualisations/perfect-square/_helpers/domHelpers';
+import { Container } from "@/app/components/visualisations/perfect-square/_components/visual/types";
 
 /**
  * @description A hook that calculates the dimensions of the given element and sets up a listener for any changes to it 

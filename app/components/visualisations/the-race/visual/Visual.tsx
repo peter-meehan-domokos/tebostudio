@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useMemo, useState } from 'react';
 import * as d3 from 'd3';
-import { beeswarmLayout } from './beeswarm/layout';
+import { beeswarmLayout } from './beeswarm/BeeswarmLayout';
 import { beeswarmComponent } from './beeswarm/component';
 import { useCircleInteraction } from './hooks/useCircleInteraction';
 import { useAnimation } from './hooks/useAnimation';

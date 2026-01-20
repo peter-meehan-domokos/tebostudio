@@ -1,5 +1,5 @@
 import { ExampleData, LiberalNumber } from '../../../../../types/data-types';
-import { Grid } from '../../../../../visual/types';
+import { Grid } from '../../../../visual/types';
 import { 
     PerfectSquareData, 
     PerfectSquareDatapoint, 
@@ -7,7 +7,7 @@ import {
     DatapointQuadrantValue,
     DatasetMetadata,
     MeasureDataSummaryItem
-} from '../../../../types';
+} from '../../../types';
 import { TransformFn } from '../../../../../types/function-types';
 import * as d3 from 'd3';
 import { sortAscending, sortDescending } from '../../../../../_helpers/arrayHelpers';
