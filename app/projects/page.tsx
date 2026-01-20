@@ -9,7 +9,7 @@ export default function Projects() {
       subtitle: "Multivariate Data Comparison & Grouping Tool",
       description1: "The Perfect Square visualises high-dimensional data as a square that fills toward an ideal target state. Compare thousands of profiles at a glance, then zoom in for detailed KPIs. Useful for rehabilitation monitoring, recruitment profiling, and seeing vector similarity for LLM tokens.",
       description2: "Built with React, TypeScript, D3, and Next, with data fetched via GraphQL from a Node server (with Python analytics). Performance is optimised in SVG (no canvas) using semantic zoom, virtualised rendering, and D3’s enter–update–exit pattern for efficient updates at scale.",
-      imagePlaceholder: "from-[#1B2A49] to-[#39A6A3]",      imageSrc: "/projects/perfect-square.png",    },
+      imagePlaceholder: "from-[#1B2A49] to-[#39A6A3]",      imageSrc: "/tebostudio/projects/perfect-square.png",    },
     {
       id: "strategysim",
       title: "Strategy Sim",
@@ -17,7 +17,7 @@ export default function Projects() {
       description1: "StrategySim is a protoype for a simulation game for young people who play sport to explore strategy through intuition and AI. Players test tactics in a real-world target challenge, then simulate them repeatedly to see what performs best—making sports data science competitive, tangible, and easy to discuss.",
       description2: "The platform integrates real-time strategy simulation, results clustering, and comparative visualization to help learners understand the relationship between tactical decisions and outcomes. Designed for both individual exploration and classroom discussion.",
       imagePlaceholder: "from-[#39A6A3] to-[#1B2A49]",
-      imageSrc: "/projects/strategy-sim.png",
+      imageSrc: "/tebostudio/projects/strategy-sim.png",
     },
     {
       id: "therace",
@@ -26,7 +26,7 @@ export default function Projects() {
       description1: "The Race turns post-match KPIs into a fast animated 'race replay'. As match time advances, cumulative performance changes are felt through overtakes and leads—making improvements and drop-offs obvious. It's a fun, emotional format for reflection and post-match discussion.",
       description2: "Particularly effective for tracking progress over time across multiple entities, this visualization style combines clear visual hierarchy with interactive controls, allowing users to explore data at different temporal scales and compare key metrics dynamically.",
       imagePlaceholder: "from-[#FFB84D] to-[#FF6F61]",
-      imageSrc: "/projects/the-race.png",
+      imageSrc: "/tebostudio/projects/the-race.png",
     },
     {
       id: "placeholder",

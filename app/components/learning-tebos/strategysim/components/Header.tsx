@@ -15,7 +15,7 @@ export default function Header() {
           <Link href="/" className="flex items-center">
             <Image
               className="dark:invert"
-              src="/next.svg"
+              src="/tebostudio/next.svg"
               alt="Next.js logo"
               width={100}
               height={20}
