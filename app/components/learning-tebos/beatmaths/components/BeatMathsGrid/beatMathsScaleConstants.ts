@@ -7,3 +7,4 @@ export const SCALE_ALLOWED_NOTES = {
 } as const;
 
 export type ScaleType = keyof typeof SCALE_ALLOWED_NOTES;
+export type SemitoneIndex = (typeof SCALE_ALLOWED_NOTES)[ScaleType][number];

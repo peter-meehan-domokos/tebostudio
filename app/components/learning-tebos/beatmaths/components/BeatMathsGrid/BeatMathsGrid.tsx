@@ -12,7 +12,11 @@ import BeatMathsGridControls from "./BeatMathsGridControls";
 import BeatMathsGridOptionIcon from "./BeatMathsGridOptionIcons";
 import ControlPanel from "./components/ControlPanel";
 import Toast from "@/app/common/components/Toast";
-import { SCALE_ALLOWED_NOTES, type ScaleType } from "./beatMathsScaleConstants";
+import {
+  SCALE_ALLOWED_NOTES,
+  type ScaleType,
+  type SemitoneIndex,
+} from "./beatMathsScaleConstants";
 
 type Note = {
   id: string;
@@ -55,6 +59,16 @@ type JoinEdge = {
   type: "step" | "linear" | "quadratic" | "cubic" | "sine";
 };
 
+type PreviewInstrumentConfig = {
+  type: "triangle" | "sine" | "square" | "sawtooth";
+  envelope: {
+    attack: number;
+    decay: number;
+    sustain: number;
+    release: number;
+  };
+};
+
 // Grouping disabled for now.
 // const GROUP_PALETTE = d3.schemeSet3.slice(0, 10);
 // const getNextGroupColor = (existingColors: string[]) => {
@@ -73,6 +87,7 @@ type ZoomPresetId = "bar1" | "bar2" | "bar4" | "bar8";
 const SIDE_CONTROL_WIDTH = 152;
 const TOP_BOTTOM_CONTROL_HEIGHT = 60;
 const GRID_DIVIDER_HEIGHT = 12;
+const BAR_STEP_COUNT = 16;
 const MAIN_PAD_LEFT = 28;
 const MAIN_PAD_TOP = 10;
 const MAIN_PAD_RIGHT = 8;
@@ -418,14 +433,23 @@ export default function BeatMathsGrid() {
     [yCount]
   );
 
+  const getFrequencyForMidi = useCallback(
+    (midi: number) => 440 * 2 ** ((midi - 69) / 12),
+    []
+  );
+
+  const normalizeSemitoneIndex = useCallback((value: number): SemitoneIndex => {
+    const normalized = ((value % 12) + 12) % 12;
+    return (normalized + 1) as SemitoneIndex;
+  }, []);
+
   const getSemitoneIndex = useCallback(
-    (yIndex: number) => {
+    (yIndex: number): SemitoneIndex => {
       const yCenterIndex = yCount / 2;
       const midi = 60 + (yCenterIndex - yIndex);
-      const normalized = ((midi % 12) + 12) % 12;
-      return normalized + 1;
+      return normalizeSemitoneIndex(midi);
     },
-    [yCount]
+    [normalizeSemitoneIndex, yCount]
   );
 
   const allowedSemitoneSet = useMemo(
@@ -487,13 +511,13 @@ export default function BeatMathsGrid() {
     }
     if (!previewMetalRef.current) {
       previewMetalRef.current = new Tone.MetalSynth({
-        frequency: 250,
         envelope: { attack: 0.001, decay: 0.2, release: 0.01 },
         harmonicity: 5.1,
         modulationIndex: 32,
         resonance: 4000,
         octaves: 1.5,
       }).connect(limiter);
+      previewMetalRef.current.frequency.value = 250;
     }
     if (!previewMembraneRef.current) {
       previewMembraneRef.current = new Tone.MembraneSynth({
@@ -518,13 +542,13 @@ export default function BeatMathsGrid() {
     }
     if (!beatMetalRef.current) {
       beatMetalRef.current = new Tone.MetalSynth({
-        frequency: 250,
         envelope: { attack: 0.001, decay: 0.2, release: 0.01 },
         harmonicity: 5.1,
         modulationIndex: 32,
         resonance: 4000,
         octaves: 1.5,
       }).connect(limiter);
+      beatMetalRef.current.frequency.value = 250;
     }
     if (!beatMembraneRef.current) {
       beatMembraneRef.current = new Tone.MembraneSynth({
@@ -570,20 +594,20 @@ export default function BeatMathsGrid() {
     if (midi === undefined) {
       return;
     }
-    synthRef.current?.triggerRelease(Tone.Frequency(midi, "midi"), Tone.now());
+    synthRef.current?.triggerRelease(getFrequencyForMidi(midi), Tone.now());
     lockedNoteMidisRef.current.delete(noteId);
     const yIndex = lockedNoteYIndicesRef.current.get(noteId);
     if (yIndex !== undefined) {
       endSound(yIndex);
       lockedNoteYIndicesRef.current.delete(noteId);
     }
-  }, [endSound]);
+  }, [endSound, getFrequencyForMidi]);
 
   const clearLockedNotes = useCallback(() => {
     const midis = Array.from(lockedNoteMidisRef.current.values());
     if (midis.length > 0) {
       synthRef.current?.triggerRelease(
-        midis.map((midi) => Tone.Frequency(midi, "midi")),
+        midis.map(getFrequencyForMidi),
         Tone.now()
       );
     }
@@ -592,7 +616,7 @@ export default function BeatMathsGrid() {
     });
     lockedNoteYIndicesRef.current.clear();
     lockedNoteMidisRef.current.clear();
-  }, [endSound]);
+  }, [endSound, getFrequencyForMidi]);
 
   const updateLockedNotePitch = useCallback(
     async (noteId: string, yIndex: number) => {
@@ -602,26 +626,26 @@ export default function BeatMathsGrid() {
         return;
       }
       if (currentMidi !== undefined) {
-        synthRef.current?.triggerRelease(Tone.Frequency(currentMidi, "midi"), Tone.now());
+        synthRef.current?.triggerRelease(getFrequencyForMidi(currentMidi), Tone.now());
         const currentYIndex = lockedNoteYIndicesRef.current.get(noteId);
         if (currentYIndex !== undefined) {
           endSound(currentYIndex);
         }
       }
       await ensureSynth();
-      synthRef.current?.triggerAttack(Tone.Frequency(nextMidi, "midi"), Tone.now(), velocityForMidi(nextMidi));
+      synthRef.current?.triggerAttack(getFrequencyForMidi(nextMidi), Tone.now(), velocityForMidi(nextMidi));
       lockedNoteMidisRef.current.set(noteId, nextMidi);
       lockedNoteYIndicesRef.current.set(noteId, yIndex);
       makeSound(yIndex);
     },
-    [endSound, ensureSynth, getMidiForYIndex, makeSound, velocityForMidi]
+    [endSound, ensureSynth, getFrequencyForMidi, getMidiForYIndex, makeSound, velocityForMidi]
   );
 
   const playGridCreatedNote = useCallback(
     async (yIndex: number) => {
       const midi = getMidiForYIndex(yIndex);
       await ensureSynth();
-      synthRef.current?.triggerAttackRelease(Tone.Frequency(midi, "midi"), 2, Tone.now(), velocityForMidi(midi));
+      synthRef.current?.triggerAttackRelease(getFrequencyForMidi(midi), 2, Tone.now(), velocityForMidi(midi));
       makeSound(yIndex);
       const timeoutId = window.setTimeout(() => {
         endSound(yIndex);
@@ -629,7 +653,7 @@ export default function BeatMathsGrid() {
       }, 2050);
       transientSoundTimeoutIdsRef.current.push(timeoutId);
     },
-    [endSound, ensureSynth, getMidiForYIndex, makeSound, velocityForMidi]
+    [endSound, ensureSynth, getFrequencyForMidi, getMidiForYIndex, makeSound, velocityForMidi]
   );
 
   const playCursorHoveredNote = useCallback(
@@ -639,7 +663,7 @@ export default function BeatMathsGrid() {
       const now = Tone.now();
       const activeHoverMidi = activeHoverMidiRef.current;
       if (activeHoverMidi !== null) {
-        synthRef.current?.triggerRelease(Tone.Frequency(activeHoverMidi, "midi"), now);
+        synthRef.current?.triggerRelease(getFrequencyForMidi(activeHoverMidi), now);
         const activeHoverYIndex = activeHoverYIndexRef.current;
         if (activeHoverYIndex !== null) {
           endSound(activeHoverYIndex);
@@ -650,7 +674,7 @@ export default function BeatMathsGrid() {
         hoverSoundTimeoutRef.current = null;
       }
       synthRef.current?.triggerAttackRelease(
-        Tone.Frequency(midi, "midi"),
+        getFrequencyForMidi(midi),
         1,
         now,
         velocityForMidi(midi)
@@ -667,7 +691,7 @@ export default function BeatMathsGrid() {
         hoverSoundTimeoutRef.current = null;
       }, 1050);
     },
-    [endSound, ensureSynth, getMidiForYIndex, makeSound, velocityForMidi]
+    [endSound, ensureSynth, getFrequencyForMidi, getMidiForYIndex, makeSound, velocityForMidi]
   );
 
   const stopCursorHoveredNote = useCallback(() => {
@@ -677,7 +701,7 @@ export default function BeatMathsGrid() {
     }
     const activeHoverMidi = activeHoverMidiRef.current;
     if (activeHoverMidi !== null) {
-      synthRef.current?.triggerRelease(Tone.Frequency(activeHoverMidi, "midi"), Tone.now());
+      synthRef.current?.triggerRelease(getFrequencyForMidi(activeHoverMidi), Tone.now());
     }
     const activeHoverYIndex = activeHoverYIndexRef.current;
     if (activeHoverYIndex !== null) {
@@ -685,7 +709,7 @@ export default function BeatMathsGrid() {
     }
     activeHoverMidiRef.current = null;
     activeHoverYIndexRef.current = null;
-  }, [endSound]);
+  }, [endSound, getFrequencyForMidi]);
 
   const createNoteId = useCallback(() => {
     if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
@@ -1616,7 +1640,7 @@ export default function BeatMathsGrid() {
           }));
           midiEntries.forEach((entry) => {
             synthRef.current?.triggerAttack(
-              Tone.Frequency(entry.midi, "midi"),
+              getFrequencyForMidi(entry.midi),
               Tone.now(),
               velocityForMidi(entry.midi) * (entry.volume / 100)
             );
@@ -1666,12 +1690,12 @@ export default function BeatMathsGrid() {
           noise.triggerAttackRelease("32n", time);
           break;
         case "beat_hat_closed":
-          metal.set({ frequency: 400, envelope: { attack: 0.001, decay: 0.05, release: 0.01 } });
-          metal.triggerAttackRelease("16n", time);
+          metal.set({ envelope: { attack: 0.001, decay: 0.05, release: 0.01 } });
+          metal.triggerAttackRelease(400, "16n", time);
           break;
         case "beat_hat_open":
-          metal.set({ frequency: 400, envelope: { attack: 0.001, decay: 0.2, release: 0.05 } });
-          metal.triggerAttackRelease("8n", time);
+          metal.set({ envelope: { attack: 0.001, decay: 0.2, release: 0.05 } });
+          metal.triggerAttackRelease(400, "8n", time);
           break;
         case "beat_tom_low":
           membrane.set({ pitchDecay: 0.01, envelope: { attack: 0.001, decay: 0.25, sustain: 0, release: 0.05 } });
@@ -1686,12 +1710,12 @@ export default function BeatMathsGrid() {
           membrane.triggerAttackRelease("D3", "8n", time);
           break;
         case "beat_crash":
-          metal.set({ frequency: 200, envelope: { attack: 0.001, decay: 0.6, release: 0.1 } });
-          metal.triggerAttackRelease("4n", time);
+          metal.set({ envelope: { attack: 0.001, decay: 0.6, release: 0.1 } });
+          metal.triggerAttackRelease(200, "4n", time);
           break;
         case "beat_ride":
-          metal.set({ frequency: 300, envelope: { attack: 0.001, decay: 0.35, release: 0.08 } });
-          metal.triggerAttackRelease("8n", time);
+          metal.set({ envelope: { attack: 0.001, decay: 0.35, release: 0.08 } });
+          metal.triggerAttackRelease(300, "8n", time);
           break;
         default:
           break;
@@ -1705,7 +1729,7 @@ export default function BeatMathsGrid() {
       if (hasJoinPlaybackRange && lastJoinX !== null && nextOffset > lastJoinX) {
         if (currentMidiSetRef.current.size > 0) {
           synthRef.current?.triggerRelease(
-            Array.from(currentMidiSetRef.current).map((midi) => Tone.Frequency(midi, "midi")),
+            Array.from(currentMidiSetRef.current).map(getFrequencyForMidi),
             time
           );
           currentMidiSetRef.current = new Set();
@@ -1754,7 +1778,7 @@ export default function BeatMathsGrid() {
 
         if (releases.length > 0) {
           synthRef.current?.triggerRelease(
-            releases.map((midi) => Tone.Frequency(midi, "midi")),
+            releases.map(getFrequencyForMidi),
             time
           );
         }
@@ -1763,7 +1787,7 @@ export default function BeatMathsGrid() {
             const entry = nextEntries.find((item) => item.midi === midi);
             const volume = entry?.volume ?? 50;
             synthRef.current?.triggerAttack(
-              Tone.Frequency(midi, "midi"),
+              getFrequencyForMidi(midi),
               time,
               velocityForMidi(midi) * (volume / 100)
             );
@@ -1838,7 +1862,7 @@ export default function BeatMathsGrid() {
     transportRef.current = null;
     if (currentMidiSetRef.current.size > 0) {
       synthRef.current?.triggerRelease(
-        Array.from(currentMidiSetRef.current).map((midi) => Tone.Frequency(midi, "midi"))
+        Array.from(currentMidiSetRef.current).map(getFrequencyForMidi)
       );
       currentMidiSetRef.current = new Set();
     }
@@ -1861,7 +1885,7 @@ export default function BeatMathsGrid() {
       const midis = Array.from(currentMidiSetRef.current);
       if (midis.length > 0) {
         midis.forEach((midi) => {
-          synthRef.current?.triggerAttack(Tone.Frequency(midi, "midi"), Tone.now(), velocityForMidi(midi));
+          synthRef.current?.triggerAttack(getFrequencyForMidi(midi), Tone.now(), velocityForMidi(midi));
         });
       }
       if (currentPlayingYIndicesRef.current.size > 0) {
@@ -1875,7 +1899,7 @@ export default function BeatMathsGrid() {
     const midis = Array.from(currentMidiSetRef.current);
     if (midis.length > 0) {
       synthRef.current?.triggerRelease(
-        midis.map((midi) => Tone.Frequency(midi, "midi")),
+        midis.map(getFrequencyForMidi),
         Tone.now()
       );
     }
@@ -1889,7 +1913,7 @@ export default function BeatMathsGrid() {
     previewTransportRef.current = null;
     if (previewMidiSetRef.current.size > 0) {
       synthRef.current?.triggerRelease(
-        Array.from(previewMidiSetRef.current).map((midi) => Tone.Frequency(midi, "midi")),
+        Array.from(previewMidiSetRef.current).map(getFrequencyForMidi),
         Tone.now()
       );
       previewMidiSetRef.current = new Set();
@@ -2025,7 +2049,7 @@ export default function BeatMathsGrid() {
       if (!previewInstrumentRef.current) {
         return null;
       }
-      const configMap: Record<string, { type: string; envelope: Tone.EnvelopeOptions }> = {
+      const configMap: Record<string, PreviewInstrumentConfig> = {
         instr_piano: { type: "triangle", envelope: { attack: 0.01, decay: 0.25, sustain: 0.4, release: 0.4 } },
         instr_epiano: { type: "sine", envelope: { attack: 0.01, decay: 0.3, sustain: 0.5, release: 0.6 } },
         instr_organ: { type: "square", envelope: { attack: 0.01, decay: 0.1, sustain: 0.9, release: 0.2 } },
@@ -2062,7 +2086,7 @@ export default function BeatMathsGrid() {
       const originMidi = 60;
       const ascendingScaleMidis = d3
         .range(0, 13)
-        .filter((offset) => allowedSemitones.has((offset % 12) + 1))
+        .filter((offset) => allowedSemitones.has(normalizeSemitoneIndex(offset)))
         .map((offset) => originMidi + offset);
       const descendingScaleMidis = ascendingScaleMidis.slice(0, -1).reverse();
       const scaleMidis = [...ascendingScaleMidis, ...descendingScaleMidis];
@@ -2072,7 +2096,7 @@ export default function BeatMathsGrid() {
           makeSound(yIndex);
           scalePreviewYIndicesRef.current.add(yIndex);
           instrument.triggerAttackRelease(
-            Tone.Frequency(midi, "midi"),
+            getFrequencyForMidi(midi),
             noteDurationSeconds,
             Tone.now(),
             velocityForMidi(midi)
@@ -2155,12 +2179,12 @@ export default function BeatMathsGrid() {
           noise.triggerAttackRelease("32n");
           break;
         case "beat_hat_closed":
-          metal.set({ frequency: 400, envelope: { attack: 0.001, decay: 0.05, release: 0.01 } });
-          metal.triggerAttackRelease("16n");
+          metal.set({ envelope: { attack: 0.001, decay: 0.05, release: 0.01 } });
+          metal.triggerAttackRelease(400, "16n");
           break;
         case "beat_hat_open":
-          metal.set({ frequency: 400, envelope: { attack: 0.001, decay: 0.2, release: 0.05 } });
-          metal.triggerAttackRelease("8n");
+          metal.set({ envelope: { attack: 0.001, decay: 0.2, release: 0.05 } });
+          metal.triggerAttackRelease(400, "8n");
           break;
         case "beat_tom_low":
           membrane.set({ pitchDecay: 0.01, envelope: { attack: 0.001, decay: 0.25, sustain: 0, release: 0.05 } });
@@ -2175,12 +2199,12 @@ export default function BeatMathsGrid() {
           membrane.triggerAttackRelease("D3", "8n");
           break;
         case "beat_crash":
-          metal.set({ frequency: 200, envelope: { attack: 0.001, decay: 0.6, release: 0.1 } });
-          metal.triggerAttackRelease("4n");
+          metal.set({ envelope: { attack: 0.001, decay: 0.6, release: 0.1 } });
+          metal.triggerAttackRelease(200, "4n");
           break;
         case "beat_ride":
-          metal.set({ frequency: 300, envelope: { attack: 0.001, decay: 0.35, release: 0.08 } });
-          metal.triggerAttackRelease("8n");
+          metal.set({ envelope: { attack: 0.001, decay: 0.35, release: 0.08 } });
+          metal.triggerAttackRelease(300, "8n");
           break;
         default:
           break;
@@ -2494,7 +2518,7 @@ export default function BeatMathsGrid() {
         }));
         midiEntries.forEach((entry) => {
           synthRef.current?.triggerAttack(
-            Tone.Frequency(entry.midi, "midi"),
+            getFrequencyForMidi(entry.midi),
             Tone.now(),
             velocityForMidi(entry.midi) * (entry.volume / 100)
           );
@@ -2533,7 +2557,7 @@ export default function BeatMathsGrid() {
 
         if (releases.length > 0) {
           synthRef.current?.triggerRelease(
-            releases.map((midi) => Tone.Frequency(midi, "midi")),
+            releases.map(getFrequencyForMidi),
             time
           );
         }
@@ -2542,7 +2566,7 @@ export default function BeatMathsGrid() {
             const entry = nextEntries.find((item) => item.midi === midi);
             const volume = entry?.volume ?? 50;
             synthRef.current?.triggerAttack(
-              Tone.Frequency(midi, "midi"),
+              getFrequencyForMidi(midi),
               time,
               velocityForMidi(midi) * (volume / 100)
             );
@@ -2776,10 +2800,10 @@ export default function BeatMathsGrid() {
   useEffect(() => {
     const svg = percussionSvgRef.current;
     const container = percussionContainerRef.current;
-    const handlerTarget = container ?? svg;
     if (!svg || visibleGridWidth === 0 || percussionViewHeight === 0) {
       return undefined;
     }
+    const handlerTarget = container ?? svg;
 
     const zoom = d3
       .zoom<SVGSVGElement, unknown>()

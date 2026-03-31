@@ -471,7 +471,7 @@ const beatMathsGridJoinComponent = (): BeatMathsGridJoinChart => {
                 .filter((note): note is Note => Boolean(note))
             : [];
           const orderedWaypoints =
-            edge.type !== "quadratic" && edge.type !== "cubic" && edge.type !== "sine" && waypointNotes.length >= 2
+            waypointNotes.length >= 2
               ? waypointNotes.sort((a, b) => (a.xIndex !== b.xIndex ? a.xIndex - b.xIndex : a.yIndex - b.yIndex))
               : [];
           const points =
@@ -528,23 +528,7 @@ const beatMathsGridJoinComponent = (): BeatMathsGridJoinChart => {
           };
         })
         .filter(
-          (
-            entry
-          ): entry is {
-            edge: JoinEdge;
-            d: string;
-            basePoints: Array<{ xIndex: number; yIndex: number }>;
-            baseMinX: number;
-            baseMaxX: number;
-            midX: number;
-            midY: number;
-            fromX: number;
-            fromY: number;
-            toX: number;
-            toY: number;
-            horizontalD?: string | null;
-            stepVerticals?: Array<{ x: number; y1: number; y2: number }>;
-          } =>
+          (entry): entry is Exclude<typeof entry, null> & { d: string } =>
             Boolean(entry?.d)
         );
 
@@ -591,7 +575,7 @@ const beatMathsGridJoinComponent = (): BeatMathsGridJoinChart => {
       });
 
       svg
-        .selectAll("path.join-hit")
+        .selectAll<SVGPathElement, (typeof edgePaths)[number]>("path.join-hit")
         .data(edgePaths, (d) => d.edge.id)
         .join("path")
           .attr("class", "join-hit")
@@ -670,7 +654,7 @@ const beatMathsGridJoinComponent = (): BeatMathsGridJoinChart => {
           });
 
       svg
-        .selectAll("path.join-line")
+        .selectAll<SVGPathElement, (typeof edgePaths)[number]>("path.join-line")
         .data(edgePaths, (d) => d.edge.id)
         .join("path")
           .attr("class", "join-line")
@@ -684,7 +668,7 @@ const beatMathsGridJoinComponent = (): BeatMathsGridJoinChart => {
       const repeatOverlay = edgePaths.flatMap((entry) => buildRepeatSegments(entry));
 
       svg
-        .selectAll("path.join-repeat")
+        .selectAll<SVGPathElement, (typeof repeatOverlay)[number]>("path.join-repeat")
         .data(repeatOverlay, (d, index) => `${d.edge.id}-r-${index}`)
         .join("path")
           .attr("class", "join-repeat")
@@ -713,7 +697,7 @@ const beatMathsGridJoinComponent = (): BeatMathsGridJoinChart => {
       const repeatStepVerticals = stepRepeatSegments.flatMap((segment) => segment.verticals);
 
       svg
-        .selectAll("path.join-line-vertical")
+        .selectAll<SVGPathElement, (typeof stepVerticals)[number]>("path.join-line-vertical")
         .data(stepVerticals, (d) => d.edge.id)
         .join("path")
           .attr("class", "join-line-vertical")
@@ -726,7 +710,7 @@ const beatMathsGridJoinComponent = (): BeatMathsGridJoinChart => {
           .style("pointer-events", "none");
 
       svg
-        .selectAll("path.join-repeat-step-horizontal")
+        .selectAll<SVGPathElement, (typeof repeatStepHorizontals)[number]>("path.join-repeat-step-horizontal")
         .data(repeatStepHorizontals, (d, index) => `${d.edge.id}-h-${index}`)
         .join("path")
           .attr("class", "join-repeat-step-horizontal")
@@ -738,7 +722,7 @@ const beatMathsGridJoinComponent = (): BeatMathsGridJoinChart => {
           .style("pointer-events", "none");
 
       svg
-        .selectAll("path.join-repeat-step-vertical")
+        .selectAll<SVGPathElement, (typeof repeatStepVerticals)[number]>("path.join-repeat-step-vertical")
         .data(repeatStepVerticals, (d, index) => `${d.edge.id}-v-${index}`)
         .join("path")
           .attr("class", "join-repeat-step-vertical")
