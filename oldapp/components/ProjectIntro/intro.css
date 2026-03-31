@@ -1,0 +1,306 @@
+/* Project Intro Styles - Extracted from perfect-square */
+
+.project-intro {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  background: #F9F9F9;
+  position: relative;
+}
+
+/* Slider dots styling */
+.project-intro .slick-dots {
+  position: absolute;
+  bottom: 1%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  z-index: 10;
+}
+
+.project-intro .slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.project-intro .slick-dots li button {
+  display: block;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: none;
+  border-radius: 100%;
+  background-color: #696969;
+  text-indent: -9999px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.project-intro .slick-dots li button:hover {
+  opacity: 0.75;
+}
+
+.project-intro .slick-dots li.slick-active button {
+  opacity: 1;
+  background-color: #39A6A3;
+}
+
+.project-intro .skip-intro-btn {
+  width: 110px;
+  height: 35px;
+  position: absolute;
+  bottom: 5%;
+  right: 2.5%;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #1B2A49;
+  background: transparent;
+  border: 1px solid #1B2A49;
+  z-index: 2;
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .skip-intro-btn {
+    font-size: 0.8rem;
+  }
+}
+
+.project-intro .skip-intro-btn.display-none {
+  display: none;
+}
+
+.project-intro .intro-slider-container {
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  overflow: visible;
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .intro-slider-container {
+    width: 90%;
+  }
+}
+
+.project-intro .intro-slide-container {
+  width: 100%;
+  height: 80vh;
+  padding-top: 5vh;
+  align-items: center;
+  overflow: visible;
+}
+
+.project-intro .intro-slide-container.last-slide {
+  height: 80vh;
+  padding-top: 5vh;
+  margin-top: 0px;
+}
+
+.project-intro .intro-slide {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-intro .slide-main-contents {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  text-wrap: wrap;
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .slide-main-contents {
+    min-height: 220px;
+  }
+}
+
+.project-intro .slide-controls {
+  padding-top: 40px;
+  margin: 0 auto 10vh auto;
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .slide-controls {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+}
+
+.project-intro .last-slide-controls {
+  margin: 20px auto;
+}
+@media only screen and (max-width: 1200px) {
+  .project-intro .last-slide-controls {
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .project-intro .last-slide-controls {
+    margin-top: -20px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .project-intro .last-slide-controls {
+    margin-top: -80px;
+    margin-bottom: 50px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .last-slide-controls {
+    margin-top: 20px;
+  }
+}
+
+.project-intro .intro-slide-text-container {
+  min-width: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-intro .intro-slide-text-container .slide-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1B2A49;
+}
+@media only screen and (max-width: 768px) {
+  .project-intro .intro-slide-text-container .slide-title {
+    font-size: 1.3rem;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .intro-slide-text-container .slide-title {
+    font-size: 1.2rem;
+    padding: 2.5%;
+  }
+}
+
+.project-intro .intro-slide-text-container .slide-textline {
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #333333;
+}
+@media only screen and (max-width: 768px) {
+  .project-intro .intro-slide-text-container .slide-textline {
+    font-size: 0.9rem;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .intro-slide-text-container .slide-textline {
+    font-size: 0.8rem;
+    padding: 2.5%;
+  }
+}
+
+.project-intro .intro-slide-visual {
+  width: 50%;
+  min-width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-intro .intro-vis-container {
+  flex-grow: 1;
+  background: grey;
+}
+
+.project-intro .intro-slide button {
+  width: 80px;
+  height: 40px;
+  border-radius: 1px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #1B2A49;
+  color: #1B2A49;
+  font-size: 0.9rem;
+}
+
+.project-intro .slide-footer-container {
+  height: 200px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  display: flex;
+  justify-content: center;
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .slide-footer-container {
+    height: 150px;
+  }
+}
+
+.project-intro .slide-footer {
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  border: solid;
+  border-color: #1B2A49;
+  border-width: 0.7;
+}
+
+.project-intro .slide-footer-visual {
+  width: 150px;
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .slide-footer-visual {
+    width: 120px;
+  }
+}
+
+.project-intro .slide-footer-visual .image {
+  width: fit-content;
+  height: 100%;
+}
+
+.project-intro .slide-footer-items-list {
+  padding: 0 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.project-intro .slide-footer-item {
+  text-align: left;
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+@media only screen and (max-width: 768px) {
+  .project-intro .slide-footer-item {
+    font-size: 0.8rem;
+    margin: 3px 0;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .project-intro .slide-footer-item {
+    font-size: 0.7rem;
+    margin: 0;
+  }
+}
+
+.project-intro .url-item {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.project-intro .slide-footer-text li {
+  text-align: left;
+}

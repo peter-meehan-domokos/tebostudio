@@ -10,7 +10,6 @@ function ProjectNav() {
   const slugParam = Array.isArray(params?.slug) ? params?.slug[0] : params?.slug;
   const githubUrl = slugParam ? PROJECT_CONFIG[slugParam]?.githubUrl : undefined;
   const docsUrl = slugParam ? PROJECT_CONFIG[slugParam]?.docsUrl : undefined;
-  console.log('ProjectNav - showIntro:', showIntro);
   
   return (
     <div className="absolute top-6 left-6 z-50 flex gap-4">

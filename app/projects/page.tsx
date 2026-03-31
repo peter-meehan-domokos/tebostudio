@@ -14,16 +14,6 @@ export default function Projects() {
       imageSrc: "/tebostudio/projects/perfect-square.png",
     },
     {
-      id: "strategysim",
-      title: "Strategy Sim",
-      subtitle: "AI Sports Strategy Learning Tool (Prototype)",
-      description1: "StrategySim is a protoype for a simulation game for young people who play sport to explore strategy through intuition and AI. Players test tactics in a real-world target challenge, then simulate them repeatedly to see what performs best—making sports data science competitive, tangible, and easy to discuss.",
-      description2: "The platform integrates real-time strategy simulation, results clustering, and comparative visualization to help learners understand the relationship between tactical decisions and outcomes. Designed for both individual exploration and classroom discussion.",
-      githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/learning-tebos/strategysim",
-      imagePlaceholder: "from-[#39A6A3] to-[#1B2A49]",
-      imageSrc: "/tebostudio/projects/strategy-sim.png",
-    },
-    {
       id: "therace",
       title: "The Race",
       subtitle: "Animated KPI Race Replay",
@@ -34,12 +24,23 @@ export default function Projects() {
       imageSrc: "/tebostudio/projects/the-race.png",
     },
     {
-      id: "placeholder",
-      title: "Project Name",
-      subtitle: "Brief Project Category or Type",
-      description1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-      description2: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.",
-      imagePlaceholder: "from-[#333333] to-[#666666]",
+      id: "beatmaths",
+      title: "Beat Maths",
+      subtitle: "Learning TEBO",
+      description1: "Beat Maths is a lightweight learning TEBO focused on rhythm and maths.",
+      description2: "This placeholder page will evolve into the full interactive experience.",
+      githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/learning-tebos/beatmaths",
+      imagePlaceholder: "from-[#00B3B3] to-[#008C8C]",
+    },
+    {
+      id: "strategysim",
+      title: "Strategy Sim",
+      subtitle: "AI Sports Strategy Learning Tool (Prototype)",
+      description1: "StrategySim is a protoype for a simulation game for young people who play sport to explore strategy through intuition and AI. Players test tactics in a real-world target challenge, then simulate them repeatedly to see what performs best—making sports data science competitive, tangible, and easy to discuss.",
+      description2: "The platform integrates real-time strategy simulation, results clustering, and comparative visualization to help learners understand the relationship between tactical decisions and outcomes. Designed for both individual exploration and classroom discussion.",
+      githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/learning-tebos/strategysim",
+      imagePlaceholder: "from-[#39A6A3] to-[#1B2A49]",
+      imageSrc: "/tebostudio/projects/strategy-sim.png",
     },
   ];
 
@@ -65,35 +66,26 @@ export default function Projects() {
             <div
               key={project.id}
               className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
-              style={index === 3 ? { display: 'none' } : {}}
             >
               {/* Image Section - Laptop aspect ratio */}
-              {project.id !== "placeholder" ? (
-                <Link href={`/projects/${project.id}`}>
-                  <div className="relative cursor-pointer" style={{ aspectRatio: '16/10' }}>
-                    {project.imageSrc ? (
-                      <Image
-                        src={project.imageSrc}
-                        alt={`${project.title} Project`}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className={`bg-gradient-to-br ${project.imagePlaceholder} flex items-center justify-center w-full h-full`}>
-                        <div className="text-white/20 font-[family-name:var(--font-montserrat)] text-2xl">
-                          [Image Placeholder]
-                        </div>
+              <Link href={`/projects/${project.id}`}>
+                <div className="relative cursor-pointer" style={{ aspectRatio: '16/10' }}>
+                  {project.imageSrc ? (
+                    <Image
+                      src={project.imageSrc}
+                      alt={`${project.title} Project`}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className={`bg-gradient-to-br ${project.imagePlaceholder} flex items-center justify-center w-full h-full`}>
+                      <div className="text-white/20 font-[family-name:var(--font-montserrat)] text-2xl">
+                        [Image Placeholder]
                       </div>
-                    )}
-                  </div>
-                </Link>
-              ) : (
-                <div className={`bg-gradient-to-br ${project.imagePlaceholder} flex items-center justify-center`} style={{ aspectRatio: '16/10' }}>
-                  <div className="text-white/20 font-[family-name:var(--font-montserrat)] text-2xl">
-                    [Image Placeholder]
-                  </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              </Link>
 
               {/* Content Section */}
               <div className="p-12">
@@ -111,34 +103,32 @@ export default function Projects() {
                     {project.description2}
                   </p>
                 </div>
-                {project.id !== "placeholder" && (
-                  <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <a
+                    href={`/tebostudio/projects/${project.id}`}
+                    className="inline-flex items-center gap-2 text-[#39A6A3] hover:text-[#329d9a] font-[family-name:var(--font-montserrat)] font-semibold transition-colors"
+                  >
+                    Open Project
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                  {project.githubUrl ? (
                     <a
-                      href={`/tebostudio/projects/${project.id}`}
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-[#39A6A3] hover:text-[#329d9a] font-[family-name:var(--font-montserrat)] font-semibold transition-colors"
                     >
-                      Open Project
+                      View Github
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8L10 18" />
                       </svg>
                     </a>
-                    {project.githubUrl ? (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-[#39A6A3] hover:text-[#329d9a] font-[family-name:var(--font-montserrat)] font-semibold transition-colors"
-                      >
-                        View Github
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8L10 18" />
-                        </svg>
-                      </a>
-                    ) : (
-                      <div />
-                    )}
-                  </div>
-                )}
+                  ) : (
+                    <div />
+                  )}
+                </div>
               </div>
             </div>
           ))}

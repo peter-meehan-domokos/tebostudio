@@ -42,7 +42,7 @@ export default function Home() {
             These are from my work in the football/education industries — I've worked across other sectors, but those projects aren't accessible for public sharing. More examples will be added soon, or get in touch to see more.
           </p>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Project Card 1 */}
             <Link 
               href="/projects/perfectsquare"
@@ -71,32 +71,6 @@ export default function Home() {
 
             {/* Project Card 2 */}
             <Link 
-              href="/projects/strategysim"
-              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
-            >
-              <div className="relative flex items-center justify-center border-4 border-[#39A6A3]" style={{ aspectRatio: '16/10' }}>
-                <Image
-                  src="/tebostudio/projects/strategy-sim.png"
-                  alt="Strategy Sim Project"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-6 border-l-4 border-[#39A6A3]">
-                <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-xl text-[#1B2A49] mb-2">
-                  Strategy Sim
-                </h3>
-                <p className="font-[family-name:var(--font-montserrat)] font-medium text-lg text-[#39A6A3] mb-6">
-                  AI Sports Strategy Learning Tool (Prototype)
-                </p>
-                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333]">
-                  StrategySim is a protoype for a simulation game for young people who play sport to explore strategy through intuition and AI. Players test tactics in a real-world target challenge, then simulate them repeatedly to see what performs best—making sports data science competitive, tangible, and easy to discuss.
-                </p>
-              </div>
-            </Link>
-
-            {/* Project Card 3 */}
-            <Link 
               href="/projects/therace"
               className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
             >
@@ -117,6 +91,57 @@ export default function Home() {
                 </p>
                 <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333]">
                   The Race turns post-match KPIs into a fast animated 'race replay'. As match time advances, cumulative performance changes are felt through overtakes and leads—making improvements and drop-offs obvious. It's a fun, emotional format for reflection and post-match discussion.
+                </p>
+              </div>
+            </Link>
+
+            {/* Project Card 3 */}
+            <Link 
+              href="/projects/beatmaths"
+              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
+            >
+              <div className="relative flex items-center justify-center border-4 border-[#00B3B3]" style={{ aspectRatio: '16/10' }}>
+                <div className="w-full h-full bg-gradient-to-br from-[#00B3B3] to-[#008C8C] flex items-center justify-center">
+                  <div className="text-white/30 font-[family-name:var(--font-montserrat)] text-lg">
+                    [Image Placeholder]
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 border-l-4 border-[#00B3B3] h-full">
+                <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-xl text-[#1B2A49] mb-2">
+                  Beat Maths
+                </h3>
+                <p className="font-[family-name:var(--font-montserrat)] font-medium text-lg text-[#39A6A3] mb-6">
+                  Learning TEBO
+                </p>
+                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333]">
+                  Beat Maths is a lightweight learning TEBO focused on rhythm and maths.
+                </p>
+              </div>
+            </Link>
+
+            {/* Project Card 4 */}
+            <Link 
+              href="/projects/strategysim"
+              className="bg-[#F9F9F9] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
+            >
+              <div className="relative flex items-center justify-center border-4 border-[#39A6A3]" style={{ aspectRatio: '16/10' }}>
+                <Image
+                  src="/tebostudio/projects/strategy-sim.png"
+                  alt="Strategy Sim Project"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 border-l-4 border-[#39A6A3]">
+                <h3 className="font-[family-name:var(--font-montserrat)] font-semibold text-xl text-[#1B2A49] mb-2">
+                  Strategy Sim
+                </h3>
+                <p className="font-[family-name:var(--font-montserrat)] font-medium text-lg text-[#39A6A3] mb-6">
+                  AI Sports Strategy Learning Tool (Prototype)
+                </p>
+                <p className="font-[family-name:var(--font-roboto)] text-sm text-[#333333]">
+                  StrategySim is a protoype for a simulation game for young people who play sport to explore strategy through intuition and AI. Players test tactics in a real-world target challenge, then simulate them repeatedly to see what performs best—making sports data science competitive, tangible, and easy to discuss.
                 </p>
               </div>
             </Link>

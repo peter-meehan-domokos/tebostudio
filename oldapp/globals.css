@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F9F9F9;
+  --foreground: #333333;
+}
+
+@theme inline {
+  /* TEBO Studio Brand Colors */
+  --color-navy: #1B2A49;
+  --color-charcoal: #333333;
+  --color-amber: #FFB84D;
+  --color-teal: #39A6A3;
+  --color-coral: #FF6F61;
+  --color-background: #F9F9F9;
+  --color-white: #ffffff;
+  
+  /* Font Variables */
+  --font-heading: var(--font-montserrat);
+  --font-body: var(--font-roboto);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Hide desktop hero on mobile, show mobile hero */
+@media (max-width: 767px) {
+  .hero-desktop {
+    display: none !important;
+  }
+  .hero-mobile {
+    display: block !important;
+  }
+}
+
+/* Hide mobile hero on desktop, show desktop hero */
+@media (min-width: 768px) {
+  .hero-mobile {
+    display: none !important;
+  }
+  .hero-desktop {
+    display: block !important;
+  }
+}
+
+@layer utilities {
+  /* Modal Animation Styles */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes scaleOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 200ms ease-out;
+  }
+
+  .animate-fadeOut {
+    animation: fadeOut 200ms ease-in;
+  }
+
+  .animate-scaleIn {
+    animation: scaleIn 300ms ease-out;
+  }
+
+  .animate-scaleOut {
+    animation: scaleOut 300ms ease-in;
+  }
+}
