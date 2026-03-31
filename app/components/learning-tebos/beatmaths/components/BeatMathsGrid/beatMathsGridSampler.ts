@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 
 type Note = {
+  id: string;
   xIndex: number;
   yIndex: number;
 };

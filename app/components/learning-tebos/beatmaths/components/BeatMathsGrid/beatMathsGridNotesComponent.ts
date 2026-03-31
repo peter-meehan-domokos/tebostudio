@@ -97,7 +97,7 @@ const beatMathsGridNotesComponent = (): BeatMathsGridNotesChart => {
   const iconFill = "#F2F5F9";
   const iconStroke = "#F2F5F9";
 
-  const renderIcon = (group: d3.Selection<SVGGElement, Note, SVGGElement, unknown>, label: string) => {
+  const renderIcon = (group: d3.Selection<SVGGElement, Note, d3.BaseType, unknown>, label: string) => {
     group.selectAll("*").remove();
     switch (label) {
       case "Kick":
@@ -432,7 +432,7 @@ const beatMathsGridNotesComponent = (): BeatMathsGridNotesChart => {
             .call((iconGroup) => {
               iconGroup.each(function (d) {
                 const label = instrumentLabelById[d.instrumentId ?? ""] ?? "";
-                const group = d3.select(this);
+                const group = d3.select<SVGGElement, Note>(this);
                 renderIcon(group, label);
               });
             });
@@ -462,7 +462,7 @@ const beatMathsGridNotesComponent = (): BeatMathsGridNotesChart => {
         .on("start", function (event, d) {
           event.sourceEvent?.stopPropagation?.();
           event.sourceEvent?.preventDefault?.();
-          if (mode !== "edit" || !dragLockedIds.has(d.id)) {
+          if (mode !== "notes" || !dragLockedIds.has(d.id)) {
             return;
           }
           dragActiveId = d.id;
@@ -478,7 +478,7 @@ const beatMathsGridNotesComponent = (): BeatMathsGridNotesChart => {
           renderDragProxy();
         })
         .on("drag", function (event, d) {
-          if (mode !== "edit" || dragActiveId !== d.id) {
+          if (mode !== "notes" || dragActiveId !== d.id) {
             return;
           }
           const distance = Number((this as SVGGElement).dataset.dragDistance ?? "0") + Math.hypot(event.dx, event.dy);
@@ -495,7 +495,7 @@ const beatMathsGridNotesComponent = (): BeatMathsGridNotesChart => {
           renderDragProxy();
         })
         .on("end", function (event, d) {
-          if (mode !== "edit" || dragActiveId !== d.id) {
+          if (mode !== "notes" || dragActiveId !== d.id) {
             dragActiveId = null;
             dragProxyId = null;
             d3.select(this.parentNode as SVGGElement).attr("opacity", 1);
@@ -526,14 +526,14 @@ const beatMathsGridNotesComponent = (): BeatMathsGridNotesChart => {
           y: yOffset + d.yIndex * yStep,
         }))
         .on("start", function (event, d) {
-          if (mode !== "edit" || !notesEnabled) {
+          if (mode !== "notes" || !notesEnabled) {
             return;
           }
           (this as SVGCircleElement).dataset.dragDistance = "0";
           (this as SVGCircleElement).dataset.suppressClick = "false";
         })
         .on("drag", function (event, d) {
-          if (mode !== "edit" || !notesEnabled) {
+          if (mode !== "notes" || !notesEnabled) {
             return;
           }
           const distance = Number((this as SVGCircleElement).dataset.dragDistance ?? "0") + Math.hypot(event.dx, event.dy);
@@ -571,7 +571,7 @@ const beatMathsGridNotesComponent = (): BeatMathsGridNotesChart => {
           renderDragProxy();
         })
         .on("end", function (event, d) {
-          if (mode !== "edit" || !notesEnabled) {
+          if (mode !== "notes" || !notesEnabled) {
             return;
           }
           const distance = Number((this as SVGCircleElement).dataset.dragDistance ?? "0");
@@ -769,7 +769,7 @@ const beatMathsGridNotesComponent = (): BeatMathsGridNotesChart => {
           .call((iconGroup) => {
             iconGroup.each(function (d) {
               const label = instrumentLabelById[d.instrumentId ?? ""] ?? "";
-              const group = d3.select(this);
+              const group = d3.select<SVGGElement, Note>(this);
               renderIcon(group, label);
             });
           });
