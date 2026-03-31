@@ -1,10 +1,12 @@
 import StrategySim from "../../components/learning-tebos/strategysim";
+import BeatMaths from "../../components/learning-tebos/beatmaths";
 import PerfectSquare from "../../components/visualisations/perfect-square";
 import TheRace from "../../components/visualisations/the-race";
 
 export async function generateStaticParams() {
   return [
     { slug: 'strategysim' },
+    { slug: 'beatmaths' },
     { slug: 'perfectsquare' },
     { slug: 'therace' }
   ];
@@ -17,6 +19,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     switch (slug) {
       case 'strategysim':
         return <StrategySim />;
+      case 'beatmaths':
+        return <BeatMaths />;
       case 'perfectsquare':
         return <PerfectSquare />;
       case 'therace':
