@@ -11,7 +11,7 @@ export default function Projects() {
       description2: "Built with React, TypeScript, D3, and Next, with data fetched via GraphQL from a Node server (with Python analytics). Performance is optimised in SVG (no canvas) using semantic zoom, virtualised rendering, and D3’s enter–update–exit pattern for efficient updates at scale.",
       githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/visualisations/perfect-square",
       imagePlaceholder: "from-[#1B2A49] to-[#39A6A3]",
-      imageSrc: "/tebostudio/projects/perfect-square.png",
+      imageSrc: "/projects/perfect-square.png",
     },
     {
       id: "therace",
@@ -21,7 +21,7 @@ export default function Projects() {
       description2: "Particularly effective for tracking progress over time across multiple entities, this visualization style combines clear visual hierarchy with interactive controls, allowing users to explore data at different temporal scales and compare key metrics dynamically.",
       githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/visualisations/the-race",
       imagePlaceholder: "from-[#FFB84D] to-[#FF6F61]",
-      imageSrc: "/tebostudio/projects/the-race.png",
+      imageSrc: "/projects/the-race.png",
     },
     {
       id: "beatmaths",
@@ -40,7 +40,7 @@ export default function Projects() {
       description2: "The platform integrates real-time strategy simulation, results clustering, and comparative visualization to help learners understand the relationship between tactical decisions and outcomes. Designed for both individual exploration and classroom discussion.",
       githubUrl: "https://github.com/peter-meehan-domokos/tebostudio/tree/main/app/components/learning-tebos/strategysim",
       imagePlaceholder: "from-[#39A6A3] to-[#1B2A49]",
-      imageSrc: "/tebostudio/projects/strategy-sim.png",
+      imageSrc: "/projects/strategy-sim.png",
     },
   ];
 
@@ -105,7 +105,7 @@ export default function Projects() {
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <a
-                    href={`/tebostudio/projects/${project.id}`}
+                    href={`/projects/${project.id}`}
                     className="inline-flex items-center gap-2 text-[#39A6A3] hover:text-[#329d9a] font-[family-name:var(--font-montserrat)] font-semibold transition-colors"
                   >
                     Open Project

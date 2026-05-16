@@ -5,9 +5,7 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
-  },
-  basePath: '/tebostudio',
-  assetPrefix: '/tebostudio/',
+  }
 };
 
 export default nextConfig;

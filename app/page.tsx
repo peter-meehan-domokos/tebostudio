@@ -50,7 +50,7 @@ export default function Home() {
             >
               <div className="relative flex items-center justify-center border-4 border-[#39A6A3]" style={{ aspectRatio: '16/10' }}>
                 <Image
-                  src="/tebostudio/projects/perfect-square.png"
+                  src="/projects/perfect-square.png"
                   alt="Perfect Square Project"
                   fill
                   className="object-cover"
@@ -76,7 +76,7 @@ export default function Home() {
             >
               <div className="relative flex items-center justify-center border-4 border-[#FFB84D]" style={{ aspectRatio: '16/10' }}>
                 <Image
-                  src="/tebostudio/projects/the-race.png"
+                  src="/projects/the-race.png"
                   alt="The Race Project"
                   fill
                   className="object-cover"
@@ -127,7 +127,7 @@ export default function Home() {
             >
               <div className="relative flex items-center justify-center border-4 border-[#39A6A3]" style={{ aspectRatio: '16/10' }}>
                 <Image
-                  src="/tebostudio/projects/strategy-sim.png"
+                  src="/projects/strategy-sim.png"
                   alt="Strategy Sim Project"
                   fill
                   className="object-cover"
@@ -171,7 +171,7 @@ export default function Home() {
       <section className="hero-mobile bg-white">
         <div className="w-full">
           <Image
-            src="/tebostudio/me_hero_mobile.jpg"
+            src="/me_hero_mobile.jpg"
             alt="Peter Meehan-Domokos"
             width={768}
             height={1024}
@@ -199,7 +199,7 @@ export default function Home() {
       <section className="hero-desktop relative w-full h-[600px] overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/tebostudio/me_hero_desktop.jpg"
+            src="/me_hero_desktop.jpg"
             alt="Peter Meehan-Domokos"
             fill
             className="object-cover"

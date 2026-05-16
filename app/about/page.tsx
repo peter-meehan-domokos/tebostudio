@@ -374,7 +374,7 @@ export default function About() {
                 <div className="flex flex-col md:flex-row gap-4 items-start">
                   <div className="w-full md:w-auto flex-shrink-0">
                     <Image 
-                      src="/tebostudio/fiddle-child.png" 
+                      src="/fiddle-child.png" 
                       alt="Playing fiddle as a child in 1988" 
                       width={400}
                       height={320}
@@ -383,7 +383,7 @@ export default function About() {
                   </div>
                   <div className="w-full md:flex-1">
                     <Image 
-                      src="/tebostudio/fiddle-adult.png" 
+                      src="/fiddle-adult.png" 
                       alt="Playing fiddle in 2025" 
                       width={600}
                       height={320}
